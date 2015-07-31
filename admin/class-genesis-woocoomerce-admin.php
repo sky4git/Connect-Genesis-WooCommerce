@@ -105,47 +105,118 @@ class Genesis_Woocommerce_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function genesis_woocoomerce_create_menu() {
+	public function genwoo_create_menu() {
 
 		/**
 		 * This function creates plguin's setting menu page in admin
 		 */
-		add_menu_page('Genesis Woocommerce Settings', 'Genesis Woocoomerce', 'administrator', 'gen-woo', $this->genesis_woocommerce_settings_page(), plugins_url('/images/icon.png', __FILE__) );
-	
-		//call register settings function
-		//add_action( 'admin_init', 'register_my_cool_plugin_settings' );
+		add_object_page( __( 'Genesis Woocommerce Settings', 'genesis-woocommerce' ),
+		__( 'Genesis Woocommerce', 'genesis-woocommerce' ),
+		'administrator', 'genesis-woocommerce',
+		array( $this, 'genwoo_settings_page' ), 'dashicons-share-alt' );
 
 	}
 	
-	private function genesis_woocommerce_settings_page() { ?>
-		<div class="wrap">
-		<h2>Your Plugin Name</h2>
-		
-		<form method="post" action="options.php">
-		    <?php settings_fields( 'my-cool-plugin-settings-group' ); ?>
-		    <?php do_settings_sections( 'my-cool-plugin-settings-group' ); ?>
-		    <table class="form-table">
-		        <tr valign="top">
-		        <th scope="row">New Option Name</th>
-		        <td><input type="text" name="new_option_name" value="<?php echo esc_attr( get_option('new_option_name') ); ?>" /></td>
-		        </tr>
-		         
-		        <tr valign="top">
-		        <th scope="row">Some Other Option</th>
-		        <td><input type="text" name="some_other_option" value="<?php echo esc_attr( get_option('some_other_option') ); ?>" /></td>
-		        </tr>
-		        
-		        <tr valign="top">
-		        <th scope="row">Options, Etc.</th>
-		        <td><input type="text" name="option_etc" value="<?php echo esc_attr( get_option('option_etc') ); ?>" /></td>
-		        </tr>
-		    </table>
-		    
-		    <?php submit_button(); ?>
-		
+	public function genwoo_settings_page() { 
+		?>
+		<form action='options.php' method='post'>
+			
+			<h2>Genesis Woocommerce</h2>
+			
+			<?php
+			settings_fields( 'pluginPage' );
+			do_settings_sections( 'pluginPage' );
+			submit_button();
+			?>
+			
 		</form>
-		</div>
-		<?php 
+		<?php		
 	} 
+	
+	public function genwoo_settings_init(  ) { 
+
+		register_setting( 'pluginPage', 'genwoo_settings' );
+	
+		add_settings_section(
+			'genwoo_pluginPage_section', 
+			__( 'Your section description', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_settings_section_callback'), 
+			'pluginPage'
+		);
+	
+		add_settings_field( 
+			'genwoo_text_field_0', 
+			__( 'Settings field description', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_text_field_0_render'), 
+			'pluginPage', 
+			'genwoo_pluginPage_section' 
+		);
+	
+		add_settings_field( 
+			'genwoo_checkbox_field_1', 
+			__( 'Settings field description', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_checkbox_field_1_render'), 
+			'pluginPage', 
+			'genwoo_pluginPage_section' 
+		);
+	
+		add_settings_field( 
+			'genwoo_textarea_field_2', 
+			__( 'Settings field description', 'genesis-woocommerce' ), 
+			array($this,'genwoo_textarea_field_2_render'), 
+			'pluginPage', 
+			'genwoo_pluginPage_section' 
+		);
+	
+		add_settings_field( 
+			'genwoo_select_field_3', 
+			__( 'Settings field description', 'genesis-woocommerce' ), 
+			array($this,'genwoo_select_field_3_render'), 
+			'pluginPage', 
+			'genwoo_pluginPage_section' 
+		);	
+	}
+
+
+	function genwoo_text_field_0_render(  ) { 	
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='text' name='genwoo_settings[genwoo_text_field_0]' value='<?php echo $options['genwoo_text_field_0']; ?>'>
+		<?php	
+	}
+
+
+	function genwoo_checkbox_field_1_render(  ) { 	
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_checkbox_field_1]' <?php checked( $options['genwoo_checkbox_field_1'], 1 ); ?> value='1'>
+		<?php	
+	}
+
+	
+	function genwoo_textarea_field_2_render(  ) { 	
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<textarea cols='40' rows='5' name='genwoo_settings[genwoo_textarea_field_2]'> 
+			<?php echo $options['genwoo_textarea_field_2']; ?>
+	 	</textarea>
+		<?php	
+	}
+
+
+	function genwoo_select_field_3_render(  ) { 	
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<select name='genwoo_settings[genwoo_select_field_3]'>
+			<option value='1' <?php selected( $options['genwoo_select_field_3'], 1 ); ?>>Option 1</option>
+			<option value='2' <?php selected( $options['genwoo_select_field_3'], 2 ); ?>>Option 2</option>
+		</select>	
+	<?php	
+	}
+
+
+	public function genwoo_settings_section_callback() { 
+		echo __( 'This section description', 'genesis-woocommerce' );
+	}
 	
 }

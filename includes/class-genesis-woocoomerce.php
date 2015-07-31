@@ -155,7 +155,9 @@ class Genesis_Woocommerce {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		// create custom plugin settings menu
-		$this->loader->add_action('admin_menu', $plugin_admin,  'genesis_woocoomerce_create_menu');
+		$this->loader->add_action('admin_menu', $plugin_admin,  'genwoo_create_menu');
+		$this->loader->add_action('admin_init', $plugin_admin,  'genwoo_settings_init');
+		//add_action( 'admin_init', 'genwoo_settings_init' );
 	}
 
 	/**
