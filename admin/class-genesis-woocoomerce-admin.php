@@ -124,8 +124,8 @@ class Genesis_Woocommerce_Admin {
 			<h2>Genesis Woocommerce</h2>
 			
 			<?php
-			settings_fields( 'pluginPage' );
-			do_settings_sections( 'pluginPage' );
+			settings_fields( 'genwoo_settings' );
+			do_settings_sections( 'genwoo_settings' );
 			submit_button();
 			?>
 			
@@ -135,15 +135,24 @@ class Genesis_Woocommerce_Admin {
 	
 	public function genwoo_settings_init(  ) { 
 
-		register_setting( 'pluginPage', 'genwoo_settings' );
-	
+		register_setting( 'genwoo_settings', 'genwoo_settings', array($this, 'genwoo_validate_inputs'));
+		
 		add_settings_section(
 			'genwoo_pluginPage_section', 
-			__( 'Your section description', 'genesis-woocommerce' ), 
+			__( 'Woocoomerce settings for your genesis child theme', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_settings_section_callback'), 
-			'pluginPage'
+			'genwoo_settings'
+		);
+		
+		add_settings_field( 
+			'genwoo_checkbox_declare_woo_support', 
+			__( 'Declare Woocommerce Support', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_checkbox_declare_woo_render'), 
+			'genwoo_settings', 
+			'genwoo_pluginPage_section' 
 		);
 	
+		/*	
 		add_settings_field( 
 			'genwoo_text_field_0', 
 			__( 'Settings field description', 'genesis-woocommerce' ), 
@@ -174,11 +183,17 @@ class Genesis_Woocommerce_Admin {
 			array($this,'genwoo_select_field_3_render'), 
 			'pluginPage', 
 			'genwoo_pluginPage_section' 
-		);	
+		);	*/
 	}
 
+	function genwoo_checkbox_declare_woo_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_checkbox_declare_woo_support]' <?php (isset($options['genwoo_checkbox_declare_woo_support']) ? checked( $options['genwoo_checkbox_declare_woo_support'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
 
-	function genwoo_text_field_0_render(  ) { 	
+	/*function genwoo_text_field_0_render(  ) { 	
 		$options = get_option( 'genwoo_settings' );
 		?>
 		<input type='text' name='genwoo_settings[genwoo_text_field_0]' value='<?php echo $options['genwoo_text_field_0']; ?>'>
@@ -212,11 +227,45 @@ class Genesis_Woocommerce_Admin {
 			<option value='2' <?php selected( $options['genwoo_select_field_3'], 2 ); ?>>Option 2</option>
 		</select>	
 	<?php	
-	}
+	}*/
 
-
+	/**
+	* This function is just a simple call back function for our setting
+	*
+	* @since	1.0.0
+	*/
 	public function genwoo_settings_section_callback() { 
-		echo __( 'This section description', 'genesis-woocommerce' );
+		echo __( 'Please select the things you need.', 'genesis-woocommerce' );
+	}
+	
+	/**
+	* This function wil Sanitize all data
+	* Thanks to http://code.tutsplus.com/tutorials/the-complete-guide-to-the-wordpress-settings-api-part-7-validation-sanitisation-and-input-i--wp-25289
+	* 
+	* @since 	1.0.0
+	*/
+	
+	public function genwoo_validate_inputs( $input ) {
+ 
+	    // Create our array for storing the validated options
+	    $output = array();
+	     
+	    // Loop through each of the incoming options
+	    foreach( $input as $key => $value ) {
+	         
+	        // Check to see if the current option has a value. If so, process it.
+	        if( isset( $input[$key] ) ) {
+	         
+	            // Strip all HTML and PHP tags and properly handle quoted strings
+	            $output[$key] = strip_tags( stripslashes( $input[ $key ] ) );
+	             
+	        } // end if
+	         
+	    } // end foreach
+	     
+	    // Return the array processing any additional functions filtered by this action
+	    return apply_filters( 'genwoo_validate_inputs', $output, $input );
+ 
 	}
 	
 }

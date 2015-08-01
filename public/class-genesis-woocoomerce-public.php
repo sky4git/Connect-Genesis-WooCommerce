@@ -39,7 +39,15 @@ class Genesis_Woocommerce_Public {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-
+	
+	/**
+	* Plugin options array
+	* @since 	1.0.0
+	* @access 	private
+	* @var 		array   of plugin options
+	*/
+	Private $options;
+	
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,7 +59,7 @@ class Genesis_Woocommerce_Public {
 
 		$this->genesis_woocoomerce = $genesis_woocoomerce;
 		$this->version = $version;
-
+		$this->options = get_option('genwoo_settings');
 	}
 
 	/**
@@ -98,6 +106,18 @@ class Genesis_Woocommerce_Public {
 
 		wp_enqueue_script( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'js/genesis-woocoomerce-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+	
+	/**
+	* Declare woocommerce support
+	* @since 1.0.0
+	*/
+	public function genwoo_declare_support(){
+		//var_dump(isset($this->options['genwoo_checkbox_declare_woo_support']));
+		$is_support_enabled = (isset($this->options['genwoo_checkbox_declare_woo_support']) ? $this->options['genwoo_checkbox_declare_woo_support'] : false);
+		if($is_support_enabled){
+			add_theme_support( 'woocommerce' );
+		}
 	}
 
 }
