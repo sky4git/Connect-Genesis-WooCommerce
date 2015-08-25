@@ -173,6 +173,12 @@ class Genesis_Woocommerce {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_breadcrumb' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_sidebar' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_wrapper_before' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_wrapper_after' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_result_count' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_sorting_dropdown' );
 	}
 
 	/**
