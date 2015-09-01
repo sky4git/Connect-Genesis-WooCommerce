@@ -74,6 +74,14 @@ class Genesis_Woocommerce_Public {
 		$this->genwoo_hide_shop_title();
 		// check shop page breadcrumb
 		$this->genwoo_shop_page_bc();
+		// configure products per row in shop page
+		$this->genwoo_configure_shop_row_products();
+		// hide sku in single product
+		$this->genwoo_single_product_hide_sku();
+		// product description heading
+		$this->genwoo_description_tab_heading();
+		// remove product tabs
+		$this->genwoo_hide_products_tabs();
 		// check studiopress simple sidebar support
 		$this->genwoo_sp_ss_support();
 		// check studiopress simple menu support
@@ -232,6 +240,14 @@ class Genesis_Woocommerce_Public {
 	}
 	
 	/**
+	* Configure number of products in shop row
+	* @since 1.0.0
+	*/
+	public function genwoo_configure_shop_row_products(){
+		add_filter('loop_shop_columns', array($this, 'genwoo_loop_columns'));				
+	}
+	
+	/**
 	* Single product breadcrumb
 	* @since 1.0.0
 	*/	
@@ -242,6 +258,31 @@ class Genesis_Woocommerce_Public {
 			add_filter( 'genesis_single_crumb', array($this,'genwoo_single_product_crumb'), 10, 2 );				
 		}
 	}
+	
+	/**
+	* Hide sku in single product page
+	* @since 1.0.0
+	*/
+	private function genwoo_single_product_hide_sku(){
+		add_filter( 'wc_product_sku_enabled', array($this,'genwoo_remove_product_page_sku'), 10, 1);				
+	}
+	
+	/**
+	* Product description heading
+	* @since 1.0.0
+	*/
+	private function genwoo_description_tab_heading(){
+		add_filter( 'woocommerce_product_description_heading', array($this, 'genwoo_product_description_tab_heading'), 10, 1 );
+	}
+	
+	/**
+	* This function helps to hide differnt product tabs
+	* @since 1.0.0
+	*/
+	private function genwoo_hide_products_tabs(){
+		add_filter( 'woocommerce_product_tabs', array($this, 'genwoo_remove_product_tabs'), 30, 1 );
+	}
+	
 	
 	/**
 	* Hide shop page title 
@@ -467,4 +508,68 @@ class Genesis_Woocommerce_Public {
 		return false;
 	}
 	
+	/**
+	* This function returns the number of products to show in shop page 
+	* 
+	* @since 1.0.0
+	* @return number of products
+	*/
+	function genwoo_loop_columns(){
+		$row_products = (isset($this->options['genwoo_shop_row_products']) ? $this->options['genwoo_shop_row_products'] : false);
+		if($row_products){ 
+			return $row_products;
+		}
+		return 4; 
+	}
+	
+	/**
+	* This function hide sku in product page if configured
+	*
+	* @since 1.0.0
+	*/
+	function genwoo_remove_product_page_sku($enabled){
+		$disable_sku = (isset($this->options['genwoo_single_product_hide_sku']) ? $this->options['genwoo_single_product_hide_sku'] : false);
+		if($disable_sku){ 
+			return false;
+		}
+		return $enabled;
+	}
+	
+	
+	/**
+	* This function changes the product descriptin heading
+	*
+	* @since 1.0.0
+	*/
+	function genwoo_product_description_tab_heading($title){
+		$description_heading = (isset($this->options['genwoo_description_tab_heading']) ? $this->options['genwoo_description_tab_heading'] : false);
+		if($description_heading){ 
+			return $description_heading;
+		}
+		return $title;
+	}
+	
+	/**
+	* This function removes the product tabs
+	*
+	* @since 1.0.0
+	*/
+	function genwoo_remove_product_tabs($tabs){
+		$remove_description_tab = (isset($this->options['genwoo_hide_description_tab']) ? $this->options['genwoo_hide_description_tab'] : false);
+		if($remove_description_tab){
+			unset( $tabs['description'] );  // Remove the description tab
+		}
+		
+		$remove_add_info_tab = (isset($this->options['genwoo_hide_additional_information_tab']) ? $this->options['genwoo_hide_additional_information_tab'] : false);
+		if($remove_add_info_tab){
+			unset( $tabs['additional_information'] );  	// Remove the additional information tab
+		}
+		
+		$remove_review_tab = (isset($this->options['genwoo_hide_review_tab']) ? $this->options['genwoo_hide_review_tab'] : false);
+		if($remove_review_tab){
+			unset( $tabs['reviews'] ); 	// Remove the reviews tab
+		}
+		
+		return $tabs;
+	}
 }
