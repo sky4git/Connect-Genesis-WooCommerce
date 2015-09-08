@@ -22,7 +22,7 @@
  * @since      1.0.0
  * @package    Genesis_Woocommerce
  * @subpackage Genesis_Woocommerce/includes
- * @author     Your Name <email@example.com>
+ * @author     Aakash Dodiya <hello@developersq.com>
  */
 class Genesis_Woocommerce_i18n {
 

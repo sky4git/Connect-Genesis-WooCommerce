@@ -75,19 +75,7 @@ class Genesis_Woocommerce_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Genesis_Woocommerce_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Genesis_Woocommerce_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'css/genesis-woocoomerce-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'css/genesis-woocoomerce-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -97,18 +85,6 @@ class Genesis_Woocommerce_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Genesis_Woocommerce_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Genesis_Woocommerce_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		wp_enqueue_script( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'js/genesis-woocoomerce-admin.js', array( 'jquery' ), $this->version, false );
 
@@ -133,7 +109,7 @@ class Genesis_Woocommerce_Admin {
 	
 	public function genwoo_settings_page() { 
 		?>
-		<form action='options.php' method='post'>
+		<form action='options.php' method='post' class='form-area'>
 			
 			<h2>Genesis Woocommerce</h2>
 			
@@ -144,7 +120,8 @@ class Genesis_Woocommerce_Admin {
 			?>
 			
 		</form>
-		<?php		
+		<?php	
+		$this->genwoo_misc_section();		
 	} 
 	
 	public function genwoo_settings_init(  ) { 
@@ -302,7 +279,7 @@ class Genesis_Woocommerce_Admin {
 			'genwoo_settings', 
 			'genwoo_woo_shop_section' 
 		);
-		
+				
 	}
 
 	// Declare woocommerce support checkbox
@@ -466,8 +443,7 @@ class Genesis_Woocommerce_Admin {
 	* Thanks to http://code.tutsplus.com/tutorials/the-complete-guide-to-the-wordpress-settings-api-part-7-validation-sanitisation-and-input-i--wp-25289
 	* 
 	* @since 	1.0.0
-	*/
-	
+	*/	
 	public function genwoo_validate_inputs( $input ) {
  
 	    // Create our array for storing the validated options
@@ -491,4 +467,20 @@ class Genesis_Woocommerce_Admin {
  
 	}
 	
+	/**
+	* Misc section
+	* @since 1.0.0
+	*/
+	private function genwoo_misc_section(){ 
+		?>
+			<div class='linkdiv'>
+				<h4>Credits</h4>
+				<a href='http://www.developersq.com' target='_blank'>DevelopersQ</a> - Genesis Themes
+			</div>
+		<?php	
+	}
+	
+
 }
+
+?>
