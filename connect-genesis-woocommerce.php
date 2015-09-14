@@ -4,7 +4,8 @@
  * Connect Genesis Woocommerce
  *
  * This plugin is built to connect Genesis child theme with Woocommerce just a better way.
- * It provides options so that store setting can easily be managed in genesis websites.
+ * It provides options so that store setting can easily be managed in genesis websites. The plugin will override
+ * single-product.php and archive-product.php breadcrumbs if selcted. 
  * 
  * Special (Many)thanks to provide plugin boilerplater for this. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  *
