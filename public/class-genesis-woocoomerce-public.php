@@ -448,9 +448,7 @@ class Genesis_Woocommerce_Public {
 		
 				return apply_filters( 'gencwooc_product_archive_crumb', $crumb, $args );
 		    }
-			
-			
-						
+								
 		}		
 		
 		return $crumb;
