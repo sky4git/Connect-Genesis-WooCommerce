@@ -157,7 +157,7 @@ class Genesis_Woocommerce {
 		// create custom plugin settings menu
 		$this->loader->add_action('admin_menu', $plugin_admin,  'genwoo_create_menu');
 		$this->loader->add_action('admin_init', $plugin_admin,  'genwoo_settings_init');
-		
+
 	}
 
 	/**

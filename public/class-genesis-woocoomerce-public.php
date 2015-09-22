@@ -86,6 +86,7 @@ class Genesis_Woocommerce_Public {
 		$this->genwoo_sp_ss_support();
 		// check studiopress simple menu support
 		$this->genwoo_sp_sm_support();
+
 	}
 
 	/**
@@ -94,18 +95,6 @@ class Genesis_Woocommerce_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Genesis_Woocommerce_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Genesis_Woocommerce_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		wp_enqueue_style( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'css/genesis-woocoomerce-public.css', array(), $this->version, 'all' );
 
@@ -117,18 +106,6 @@ class Genesis_Woocommerce_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Genesis_Woocommerce_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Genesis_Woocommerce_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		wp_enqueue_script( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'js/genesis-woocoomerce-public.js', array( 'jquery' ), $this->version, false );
 
@@ -572,4 +549,5 @@ class Genesis_Woocommerce_Public {
 		
 		return $tabs;
 	}
+	
 }
