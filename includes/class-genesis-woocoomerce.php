@@ -178,7 +178,7 @@ class Genesis_Woocommerce {
 		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_wrapper_before' );
 		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_wrapper_after' );
 		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_result_count' );
-		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_sorting_dropdown' );
+		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_sorting_dropdown');
 	}
 
 	/**

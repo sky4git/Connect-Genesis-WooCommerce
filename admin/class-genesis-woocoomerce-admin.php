@@ -206,11 +206,51 @@ class Genesis_Woocommerce_Admin {
 			array($this, 'genwoo_settings_woo_product_section_callback'), 
 			'genwoo_settings'
 		);
-		// Single  Product breadcrumbs 
+		// Single Product breadcrumbs 
 		add_settings_field( 
 			'genwoo_single_product_bc', 
 			__( 'Modify single product breadcrumb', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_single_product_bc_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Single product sku hide
+		add_settings_field( 
+			'genwoo_single_product_hide_sku', 
+			__( 'Hide SKU in product page', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_single_product_hide_sku_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Description tab heading
+		add_settings_field( 
+			'genwoo_description_tab_heading', 
+			__( 'Product description tab heading', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_description_tab_heading_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Hide Description tab
+		add_settings_field( 
+			'genwoo_hide_description_tab', 
+			__( 'Hide description tab', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_hide_description_tab_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Hide additional information tab
+		add_settings_field( 
+			'genwoo_hide_additional_information_tab', 
+			__( 'Hide additional information tab', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_hide_additional_information_tab_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Hide review tab
+		add_settings_field( 
+			'genwoo_hide_review_tab', 
+			__( 'Hide review tab', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_hide_review_tab_render'), 
 			'genwoo_settings', 
 			'genwoo_woo_product_section' 
 		);
@@ -254,55 +294,15 @@ class Genesis_Woocommerce_Admin {
 			'genwoo_settings', 
 			'genwoo_woo_shop_section' 
 		);
-		//*----------------------------------- STUDIOPRESS SECTION -----------------------------------*//
-		add_settings_section(
-			'genwoo_sp_section', 
-			__( 'Studio press plugins', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_settings_sp_section_callback'), 
-			'genwoo_settings'
-		);
-		// Enable Studiopress simple sidebar plugin support
+		// Number of products in shop per row
 		add_settings_field( 
-			'genwoo_checkbox_sp_ss_support', 
-			__( 'Enable Studiopress Simple Sidebar plugin support', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_checkbox_sp_ss_render'), 
+			'genwoo_shop_row_products', 
+			__( 'Number of products in a row', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_shop_row_products_render'), 
 			'genwoo_settings', 
-			'genwoo_sp_section' 
-		);		
-		// Enable Studiopress simple menus plugin support
-		add_settings_field( 
-			'genwoo_checkbox_sp_sm_support', 
-			__( 'Enable Studiopress Simple Menu plugin support', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_checkbox_sp_sm_render'), 
-			'genwoo_settings', 
-			'genwoo_sp_section' 
+			'genwoo_woo_shop_section' 
 		);
 		
-		/*	
-		add_settings_field( 
-			'genwoo_text_field_0', 
-			__( 'Settings field description', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_text_field_0_render'), 
-			'pluginPage', 
-			'genwoo_pluginPage_section' 
-		);
-	
-	
-		add_settings_field( 
-			'genwoo_textarea_field_2', 
-			__( 'Settings field description', 'genesis-woocommerce' ), 
-			array($this,'genwoo_textarea_field_2_render'), 
-			'pluginPage', 
-			'genwoo_pluginPage_section' 
-		);
-	
-		add_settings_field( 
-			'genwoo_select_field_3', 
-			__( 'Settings field description', 'genesis-woocommerce' ), 
-			array($this,'genwoo_select_field_3_render'), 
-			'pluginPage', 
-			'genwoo_pluginPage_section' 
-		);	*/
 	}
 
 	// Declare woocommerce support checkbox
@@ -345,22 +345,6 @@ class Genesis_Woocommerce_Admin {
 		<?php
 	}
 		
-	// Enable studiopress Simple Sidebar support
-	function genwoo_checkbox_sp_ss_render(){
-		$options = get_option( 'genwoo_settings' );
-		?>
-		<input type='checkbox' name='genwoo_settings[genwoo_checkbox_sp_ss_support]' <?php (isset($options['genwoo_checkbox_sp_ss_support']) ? checked( $options['genwoo_checkbox_sp_ss_support'], 1 ) : ''); ?> value='1'>
-		<?php
-	}
-
-	// Enable studiopress Simple Menu Support
-	function genwoo_checkbox_sp_sm_render(){
-		$options = get_option( 'genwoo_settings' );
-		?>
-		<input type='checkbox' name='genwoo_settings[genwoo_checkbox_sp_sm_support]' <?php (isset($options['genwoo_checkbox_sp_sm_support']) ? checked( $options['genwoo_checkbox_sp_sm_support'], 1 ) : ''); ?> value='1'>
-		<?php
-	}
-	
 	// Single product breadcrumb modify
 	function genwoo_single_product_bc_render(){
 		$options = get_option( 'genwoo_settings' );
@@ -401,24 +385,54 @@ class Genesis_Woocommerce_Admin {
 		<?php
 	}
 	
-	/*function genwoo_textarea_field_2_render(  ) { 	
+	// number of products per row
+	function genwoo_shop_row_products_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<textarea cols='40' rows='5' name='genwoo_settings[genwoo_textarea_field_2]'> 
-			<?php echo $options['genwoo_textarea_field_2']; ?>
-	 	</textarea>
-		<?php	
+		<input type='number' name='genwoo_settings[genwoo_shop_row_products]' value='<?php echo (isset($options['genwoo_shop_row_products']) ? $options['genwoo_shop_row_products'] : 4 ); ?>' min="1" max="10" >
+		<?php
 	}
-	function genwoo_select_field_3_render(  ) { 	
+	
+	// hide sku in single product
+	function genwoo_single_product_hide_sku_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<select name='genwoo_settings[genwoo_select_field_3]'>
-			<option value='1' <?php selected( $options['genwoo_select_field_3'], 1 ); ?>>Option 1</option>
-			<option value='2' <?php selected( $options['genwoo_select_field_3'], 2 ); ?>>Option 2</option>
-		</select>	
-	<?php	
-	}*/
-
+		<input type='checkbox' name='genwoo_settings[genwoo_single_product_hide_sku]' <?php (isset($options['genwoo_single_product_hide_sku']) ? checked( $options['genwoo_single_product_hide_sku'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
+	
+	// product description tab heading
+	function genwoo_description_tab_heading_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='text' name='genwoo_settings[genwoo_description_tab_heading]'  value='<?php echo (isset($options['genwoo_description_tab_heading']) ?  $options['genwoo_description_tab_heading'] : 'Product Description'); ?>'>
+		<?php
+	}
+	
+	// hide product description tab
+	function genwoo_hide_description_tab_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_hide_description_tab]' <?php (isset($options['genwoo_hide_description_tab']) ? checked( $options['genwoo_hide_description_tab'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
+	
+	// hide product additional information tab
+	function genwoo_hide_additional_information_tab_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_hide_additional_information_tab]' <?php (isset($options['genwoo_hide_additional_information_tab']) ? checked( $options['genwoo_hide_additional_information_tab'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
+	
+	// hide product review tab
+	function genwoo_hide_review_tab_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_hide_review_tab]' <?php (isset($options['genwoo_hide_review_tab']) ? checked( $options['genwoo_hide_review_tab'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
+	
 	/**
 	* This function is just a simple call back function for General section for our setting
 	*
@@ -446,15 +460,7 @@ class Genesis_Woocommerce_Admin {
 		echo __( 'Shop page settings.', 'genesis-woocommerce' );
 	}
 	
-	/**
-	* This function is just a simple call back function for SP section for our setting
-	*
-	* @since	1.0.0
-	*/
-	public function genwoo_settings_sp_section_callback() { 
-		echo __( 'Lets take care of studiopress things.', 'genesis-woocommerce' );
-	}
-	
+
 	/**
 	* This function wil Sanitize all data
 	* Thanks to http://code.tutsplus.com/tutorials/the-complete-guide-to-the-wordpress-settings-api-part-7-validation-sanitisation-and-input-i--wp-25289
