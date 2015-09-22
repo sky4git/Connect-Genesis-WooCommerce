@@ -3,11 +3,11 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://example.com
+ * @link       http://www.developersq.com
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Genesis_Woocommerce
+ * @subpackage Genesis_Woocommerce/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @package    Genesis_Woocommerce
+ * @subpackage Genesis_Woocommerce/includes
+ * @author     Aakash Dodiya <hello@developersq.com>
  */
-class Plugin_Name_Activator {
+class Genesis_Woocommerce_Activator {
 
 	/**
 	 * Short Description. (use period)

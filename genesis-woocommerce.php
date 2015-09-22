@@ -14,7 +14,7 @@
  * @package           genesis_woocommerce
  *
  * @wordpress-plugin
- * Genesis Woocoomerce:       Genesis Woocommerce
+ * Plugin Name:       Genesis Woocommerce
  * Plugin URI:        http://www.developersq.com/
  * Description:       Connect your Genesis child theme better way with Woocommerce.
  * Version:           1.0.0
@@ -37,7 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function activate_genesis_woocoomerce() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-genesis-woocoomerce-activator.php';
-	Plugin_Name_Activator::activate();
+	Genesis_Woocommerce_Activator::activate();
 }
 
 /**
@@ -46,7 +46,7 @@ function activate_genesis_woocoomerce() {
  */
 function deactivate_genesis_woocoomerce() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-genesis-woocoomerce-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+	Genesis_Woocommerce_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_genesis_woocoomerce' );
@@ -69,7 +69,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-genesis-woocoomerce.php';
  */
 function run_genesis_woocoomerce() {
 
-	$plugin = new Plugin_Name();
+	$plugin = new Genesis_Woocommerce();
 	$plugin->run();
 
 }
