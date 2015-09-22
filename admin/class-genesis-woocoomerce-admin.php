@@ -100,8 +100,8 @@ class Genesis_Woocommerce_Admin {
 		/**
 		 * This function creates plguin's setting menu page in admin
 		 */
-		add_object_page( __( 'Genesis Woocommerce Settings', 'genesis-woocommerce' ),
-		__( 'Genesis Woocommerce', 'genesis-woocommerce' ),
+		add_object_page( __( 'Connect Genesis Woocommerce Settings', 'genesis-woocommerce' ),
+		__( 'Connect Genesis Woocommerce', 'genesis-woocommerce' ),
 		'administrator', 'genesis-woocommerce',
 		array( $this, 'genwoo_settings_page' ), 'dashicons-share-alt' );
 
@@ -111,7 +111,7 @@ class Genesis_Woocommerce_Admin {
 		?>
 		<form action='options.php' method='post' class='form-area'>
 			
-			<h2>Genesis Woocommerce</h2>
+			<h2>Connect Genesis Woocommerce</h2>
 			
 			<?php
 			settings_fields( 'genwoo_settings' );
