@@ -1,7 +1,7 @@
-=== Genesis Woocoomerce ===
+=== Connect Genesis Woocoomerce ===
 Contributors: Aakash Dodiya
 Website: http://www.developersq.com
-Tags: comments, spam
+Tags: genesis, woocommerce
 Requires at least: 4.0
 Tested up to: Wordpress 4.3 & Genesis 2.2+ & Woocommerce 2.4+
 Stable tag: 1.0

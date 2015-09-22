@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Genesis Woocommerce Plugin
+ * Connect Genesis Woocommerce
  *
  * This plugin is built to connect Genesis child theme with Woocommerce just a better way.
  * It provides options so that store setting can easily be managed in genesis websites.
  * 
  * Special (Many)thanks to provide plugin boilerplater for this. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  *
- * @link              http://www.developersd.com
+ * @link              http://www.developersq.com
  * @since             1.0.0
- * @package           genesis_woocommerce
+ * @package           connect_genesis_woocommerce
  *
  * @wordpress-plugin
- * Plugin Name:       Genesis Woocommerce
+ * Plugin Name:       Connect Genesis Woocommerce
  * Plugin URI:        http://www.developersq.com/
  * Description:       Connect your Genesis child theme better way with Woocommerce.
  * Version:           1.0.0
