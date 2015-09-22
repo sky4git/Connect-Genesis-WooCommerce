@@ -157,7 +157,7 @@ class Genesis_Woocommerce {
 		// create custom plugin settings menu
 		$this->loader->add_action('admin_menu', $plugin_admin,  'genwoo_create_menu');
 		$this->loader->add_action('admin_init', $plugin_admin,  'genwoo_settings_init');
-		//add_action( 'admin_init', 'genwoo_settings_init' );
+		
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Genesis_Woocommerce {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		$this->loader->add_action('after_setup_theme', $plugin_public, 'genwoo_declare_support');
 	}
 
 	/**
