@@ -4,8 +4,7 @@
  * Genesis Woocommerce Plugin
  *
  * This plugin is built to connect Genesis child theme with Woocommerce just a better way.
- * This plugin creates option in customizer so theme developer can easily change the things the way they wants.
- * This plugin is opensouce and available on GitHub.
+ * It provides options so that store setting can easily be managed in genesis websites.
  * 
  * Special (Many)thanks to provide plugin boilerplater for this. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  *

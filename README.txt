@@ -11,10 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 This plugin is built to connect Genesis child theme with Woocommerce just a better way.
-This plugin creates option in customizer so theme developer can easily change the things the way they wants.
+It provides options so that store setting can easily be managed in genesis websites.
 
 == Installation ==
-
 1. Upload `genesis-woocoomerce` directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
