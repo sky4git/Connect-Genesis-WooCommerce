@@ -157,8 +157,7 @@ class Genesis_Woocommerce_Admin {
 			__( 'Woocoomerce settings for your genesis child theme', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_settings_general_section_callback'), 
 			'genwoo_settings'
-		);
-		
+		);		
 		//* Declare woocoomerce support
 		add_settings_field( 
 			'genwoo_checkbox_declare_woo_support', 
@@ -166,8 +165,7 @@ class Genesis_Woocommerce_Admin {
 			array($this, 'genwoo_checkbox_declare_woo_render'), 
 			'genwoo_settings', 
 			'genwoo_general_section' 
-		);
-	
+		);	
 		// Enable Genesis posttype support for products
 		add_settings_field( 
 			'genwoo_checkbox_genesis_layout_support', 
@@ -175,8 +173,7 @@ class Genesis_Woocommerce_Admin {
 			array($this, 'genwoo_checkbox_genesis_layout_render'), 
 			'genwoo_settings', 
 			'genwoo_general_section' 
-		);
-		
+		);		
 		// Enable Genesis SEO support for products
 		add_settings_field( 
 			'genwoo_checkbox_genesis_seo_support', 
@@ -184,65 +181,80 @@ class Genesis_Woocommerce_Admin {
 			array($this, 'genwoo_checkbox_genesis_seo_render'), 
 			'genwoo_settings', 
 			'genwoo_general_section' 
+		);		
+		// Remove woocommerce sidebar
+		add_settings_field( 
+			'genwoo_remove_sidebar', 
+			__( 'Remove woocommerce sidebar', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_remove_sidebar_render'), 
+			'genwoo_settings', 
+			'genwoo_general_section' 
+		);
+		// Remove woocommerce wrapper
+		add_settings_field( 
+			'genwoo_remove_wrapper', 
+			__( 'Remove woocommerce wrapper before & after main content', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_remove_wrapper_render'), 
+			'genwoo_settings', 
+			'genwoo_general_section' 
 		);
 		
-		//*--------------------------- WOOCOMMERCE BREADCRUMBS SECTION --------------------------*//
+		//*--------------------------- WOOCOMMERCE SINGLE PRODUCT SECTION --------------------------*//
 		add_settings_section(
-			'genwoo_woocom_section', 
-			__( 'Woocoomerce breadcrumbs', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_settings_woocom_section_callback'), 
+			'genwoo_woo_product_section', 
+			__( 'Single Product Settings', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_settings_woo_product_section_callback'), 
 			'genwoo_settings'
 		);
-		// Delimiter
+		// Single  Product breadcrumbs 
 		add_settings_field( 
-			'genwoo_woocom_bc_delimiter', 
-			__( 'Woocoommerce Breadcrumb Delimiter', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_woocom_bc_delimiter_render'), 
+			'genwoo_single_product_bc', 
+			__( 'Modify single product breadcrumb', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_single_product_bc_render'), 
 			'genwoo_settings', 
-			'genwoo_woocom_section' 
+			'genwoo_woo_product_section' 
 		);
-		// Wrap before
-		add_settings_field( 
-			'genwoo_woocom_bc_wrap_before', 
-			__( 'Woocoommerce Breadcrumb Wrap Before', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_woocom_bc_wrap_before_render'), 
-			'genwoo_settings', 
-			'genwoo_woocom_section' 
-		);
-		// Wrap after
-		add_settings_field( 
-			'genwoo_woocom_bc_wrap_after', 
-			__( 'Woocoommerce Breadcrumb Wrap After', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_woocom_bc_wrap_after_render'), 
-			'genwoo_settings', 
-			'genwoo_woocom_section' 
-		);
-		// Just Before 
-		add_settings_field( 
-			'genwoo_woocom_bc_before', 
-			__( 'Woocoommerce Breadcrumb Before', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_woocom_bc_before_render'), 
-			'genwoo_settings', 
-			'genwoo_woocom_section' 
-		);
-		// Just After
-		add_settings_field( 
-			'genwoo_woocom_bc_after', 
-			__( 'Woocoommerce Breadcrumb After', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_woocom_bc_after_render'), 
-			'genwoo_settings', 
-			'genwoo_woocom_section' 
-		);
-		// Home text
-		add_settings_field( 
-			'genwoo_woocom_bc_home', 
-			__( 'Woocoommerce Breadcrumb Home Text', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_woocom_bc_home_render'), 
-			'genwoo_settings', 
-			'genwoo_woocom_section' 
-		);		
 		
-		//*------------------------------- STUDIOPRESS SECTION ---------------------------------*//
+		//*--------------------------- WOOCOMMERCE SHOP PAGE SECTION --------------------------*//
+		add_settings_section(
+			'genwoo_woo_shop_section', 
+			__( 'Shop page settings', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_settings_woo_shop_page_section_callback'), 
+			'genwoo_settings'
+		);
+		// Shop page breadcrumbs - Modify shop page/product category breadcrumb Genesis way 
+		add_settings_field( 
+			'genwoo_shop_page_bc', 
+			__( 'Modify Shop page breadcrumb', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_shop_page_bc_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);		
+		// Remove Result count text
+		add_settings_field( 
+			'genwoo_remove_result_count', 
+			__( 'Remove result count text', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_remove_result_count_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);
+		// Hide shop page title
+		add_settings_field( 
+			'genwoo_hide_shop_page_title', 
+			__( 'Hide shop page title', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_hide_shop_title_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);
+		// Hide sorting dropdown
+		add_settings_field( 
+			'genwoo_hide_shop_dropdown', 
+			__( 'Remove sorting dropdown from shop page', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_hide_shop_dropdown_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);
+		//*----------------------------------- STUDIOPRESS SECTION -----------------------------------*//
 		add_settings_section(
 			'genwoo_sp_section', 
 			__( 'Studio press plugins', 'genesis-woocommerce' ), 
@@ -317,7 +329,23 @@ class Genesis_Woocommerce_Admin {
 		<?php
 	}
 	
-	// Enable  studiopress Simple Sidebar support
+	// Remove wooocommerce sidebar render
+	function genwoo_remove_sidebar_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_remove_sidebar]' <?php (isset($options['genwoo_remove_sidebar']) ? checked( $options['genwoo_remove_sidebar'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
+	
+	// Remove woocommerce wrapper
+	function genwoo_remove_wrapper_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<input type='checkbox' name='genwoo_settings[genwoo_remove_wrapper]' <?php (isset($options['genwoo_remove_wrapper']) ? checked( $options['genwoo_remove_wrapper'], 1 ) : ''); ?> value='1'>
+		<?php
+	}
+		
+	// Enable studiopress Simple Sidebar support
 	function genwoo_checkbox_sp_ss_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
@@ -333,54 +361,44 @@ class Genesis_Woocommerce_Admin {
 		<?php
 	}
 	
-	// Woocommerce breadcrumbs delimiter
-	function genwoo_woocom_bc_delimiter_render(  ) { 	
+	// Single product breadcrumb modify
+	function genwoo_single_product_bc_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<input type='text' name='genwoo_settings[genwoo_woocom_bc_delimiter]' value='<?php echo (isset($options['genwoo_woocom_bc_delimiter']) ? $options['genwoo_woocom_bc_delimiter'] : '&#47;'); ?>'>
+		<input type='checkbox' name='genwoo_settings[genwoo_single_product_bc]' <?php (isset($options['genwoo_single_product_bc']) ? checked( $options['genwoo_single_product_bc'], 1 ) : ''); ?> value='1'>
 		<?php	
 	}
 	
-	// Woocommerce breadcrumbs wrap before
-	function genwoo_woocom_bc_wrap_before_render(  ) { 	
+	// Product shop page section breadcrumbs
+	function genwoo_shop_page_bc_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<input type='text' name='genwoo_settings[genwoo_woocom_bc_wrap_before]' value='<?php echo (isset($options['genwoo_woocom_bc_wrap_before']) ? $options['genwoo_woocom_bc_wrap_before'] : '<div class="breadcrumb wrap" itemprop="breadcrumb">'); ?>'>
-		<span>default Woocommerce uses &lt;nav&gt; tag</span>
-		<?php	
+		<input type='checkbox' name='genwoo_settings[genwoo_shop_page_bc]' <?php (isset($options['genwoo_shop_page_bc']) ? checked( $options['genwoo_shop_page_bc'], 1 ) : ''); ?> value='1'>
+		<?php
 	}
 	
-	// Woocommerce breadcrumb after
-	function genwoo_woocom_bc_wrap_after_render(  ) { 	
+	// Remove result count text
+	function genwoo_remove_result_count_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<input type='text' name='genwoo_settings[genwoo_woocom_bc_wrap_after]' value='<?php echo (isset($options['genwoo_woocom_bc_wrap_before']) ? $options['genwoo_woocom_bc_wrap_after'] : '</div>'); ?>'>
-		<span>default Woocommerce uses &lt;/nav&gt; tag</span>
-		<?php	
-	}
-
-	// Woocommerce breadcrumbs before
-	function genwoo_woocom_bc_before_render(  ) { 	
-		$options = get_option( 'genwoo_settings' );
-		?>
-		<input type='text' name='genwoo_settings[genwoo_woocom_bc_before]' value='<?php echo (isset($options['genwoo_woocom_bc_before']) ? $options['genwoo_woocom_bc_before'] : ''); ?>'>
-		<?php	
+		<input type='checkbox' name='genwoo_settings[genwoo_remove_result_count]' <?php (isset($options['genwoo_remove_result_count']) ? checked( $options['genwoo_remove_result_count'], 1 ) : ''); ?> value='1'>
+		<?php
 	}
 	
-	// Woocommerce breadcrumbs after
-	function genwoo_woocom_bc_after_render(  ) { 	
+	// hide page title
+	function genwoo_hide_shop_title_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<input type='text' name='genwoo_settings[genwoo_woocom_bc_after]' value='<?php echo (isset($options['genwoo_woocom_bc_after']) ? $options['genwoo_woocom_bc_after'] : ''); ?>'>
-		<?php	
+		<input type='checkbox' name='genwoo_settings[genwoo_hide_shop_title]' <?php (isset($options['genwoo_hide_shop_title']) ? checked( $options['genwoo_hide_shop_title'], 1 ) : ''); ?> value='1'>
+		<?php
 	}
 	
-	// Woocommerce breadcrumbs Home text
-	function genwoo_woocom_bc_home_render(  ) { 	
+	// hide sorting dropdown
+	function genwoo_hide_shop_dropdown_render(){
 		$options = get_option( 'genwoo_settings' );
 		?>
-		<input type='text' name='genwoo_settings[genwoo_woocom_bc_home]' value='<?php echo (isset($options['genwoo_woocom_bc_home']) ? $options['genwoo_woocom_bc_home'] : ''); ?>'>
-		<?php	
+		<input type='checkbox' name='genwoo_settings[genwoo_hide_shop_dropdown]' <?php (isset($options['genwoo_hide_shop_dropdown']) ? checked( $options['genwoo_hide_shop_dropdown'], 1 ) : ''); ?> value='1'>
+		<?php
 	}
 	
 	/*function genwoo_textarea_field_2_render(  ) { 	
@@ -391,8 +409,6 @@ class Genesis_Woocommerce_Admin {
 	 	</textarea>
 		<?php	
 	}
-
-
 	function genwoo_select_field_3_render(  ) { 	
 		$options = get_option( 'genwoo_settings' );
 		?>
@@ -413,12 +429,21 @@ class Genesis_Woocommerce_Admin {
 	}
 	
 	/**
-	* This function is just a simple call back function for Woocommerce section for our setting
+	* This function is just a simple call back function for Single product section for our setting
 	*
 	* @since	1.0.0
 	*/
-	public function genwoo_settings_woocom_section_callback() { 
-		echo __( 'WooCommerce Breadcrumbs settings.', 'genesis-woocommerce' );
+	function genwoo_settings_woo_product_section_callback(){
+		echo __( 'Single Product Breadcrumbs settings.', 'genesis-woocommerce' );
+	} 
+	
+	/**
+	* This function is just simple call back function for shop page section
+	*
+	* @since 1.0.0
+	*/
+	function genwoo_settings_woo_shop_page_section_callback(){
+		echo __( 'Shop page settings.', 'genesis-woocommerce' );
 	}
 	
 	/**

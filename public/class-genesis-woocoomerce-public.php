@@ -59,14 +59,21 @@ class Genesis_Woocommerce_Public {
 
 		$this->genesis_woocoomerce = $genesis_woocoomerce;
 		$this->version = $version;
+		
 		// Load all options for Genesis woocommerce settings
 		$this->options = get_option('genwoo_settings');
 		// Check Woocommerce support
 		$this->genwoo_declare_support();
 		// check Genesis layout support
-		$this->genwoo_gensis_layout_support();
+		$this->genwoo_genesis_layout_support();
 		// check Genesis SEO settings support
-		$this->genwoo_gensis_seo_support();
+		$this->genwoo_genesis_seo_support();
+		// check single product breadcrumb
+		$this->genwoo_single_product_bc();
+		// remove shop page title
+		$this->genwoo_hide_shop_title();
+		// check shop page breadcrumb
+		$this->genwoo_shop_page_bc();
 		// check studiopress simple sidebar support
 		$this->genwoo_sp_ss_support();
 		// check studiopress simple menu support
@@ -120,6 +127,18 @@ class Genesis_Woocommerce_Public {
 	}
 	
 	/**
+	* This function removes the woocommerce breadcrumb.
+	* 
+	* We just need genesis breadcrumb so there is no need of woocommece breadcrumb
+	*
+	* @since 1.0.0
+	*/
+	public function genwoo_remove_breadcrumb(){
+		// Remove Woocommerce breadcrumb from the equation in the begginng
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+	}
+	
+	/**
 	* Declare woocommerce support
 	* @since 1.0.0
 	*/
@@ -134,7 +153,7 @@ class Genesis_Woocommerce_Public {
 	* Genesis Layout support
 	* @since 1.0.0
 	*/
-	private function genwoo_gensis_layout_support(){ 
+	private function genwoo_genesis_layout_support(){ 
 		$is_genesis_layout = (isset($this->options['genwoo_checkbox_genesis_layout_support']) ? $this->options['genwoo_checkbox_genesis_layout_support'] : false);
 		if($is_genesis_layout){
 			add_post_type_support( 'product',  'genesis-layouts' );
@@ -145,13 +164,108 @@ class Genesis_Woocommerce_Public {
 	* Genesis SEO support
 	* @since 1.0.0
 	*/
-	private function genwoo_gensis_seo_support(){
+	private function genwoo_genesis_seo_support(){
 		$is_genesis_seo = (isset($this->options['genwoo_checkbox_genesis_seo_support']) ? $this->options['genwoo_checkbox_genesis_seo_support'] : false);
 		if($is_genesis_seo){
 			add_post_type_support( 'product', array( 'genesis-seo' ) );
 		}
+	}	
+	
+	/**
+	* Remove woocommerce sidebars
+	* @since 1.0.0
+	*/	
+	public function genwoo_remove_sidebar(){
+		$is_remove_sidebar = (isset($this->options['genwoo_remove_sidebar']) ? $this->options['genwoo_remove_sidebar'] : false);
+		if($is_remove_sidebar){ 
+			// Unhook WooCommerce Sidebar - use Genesis Sidebars instead
+			remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );				
+		}
 	}
-		
+	
+	/**
+	* Remove woocommerce wrapper - before
+	* @since 1.0.0
+	*/	
+	public function	genwoo_remove_wrapper_before(){
+		$is_remove_wrapper = (isset($this->options['genwoo_remove_wrapper']) ? $this->options['genwoo_remove_wrapper'] : false);
+		if($is_remove_wrapper){ 
+			// Unhook WooCommerce wrappers
+			remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );				
+		}
+	}
+	
+	/**
+	* Remove woocommerce wrapper - after
+	* @since 1.0.0
+	*/	
+	public function	genwoo_remove_wrapper_after(){
+		$is_remove_wrapper = (isset($this->options['genwoo_remove_wrapper']) ? $this->options['genwoo_remove_wrapper'] : false);
+		if($is_remove_wrapper){ 
+			// Unhook WooCommerce wrappers
+			remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );				
+		}
+	}
+	
+	/**
+	* Remove result count in shop page
+	* @since 1.0.0
+	*/
+	public function genwoo_remove_result_count(){
+		$is_remove_count = (isset($this->options['genwoo_remove_result_count']) ? $this->options['genwoo_remove_result_count'] : false);
+		if($is_remove_count){  
+			// Remove the action
+			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );				
+		}
+	}
+	
+	/**
+	* Remove sorting dropdown
+	* @since 1.0.0
+	*/
+	public function genwoo_remove_sorting_dropdown(){
+		$is_remove_dropdown = (isset($this->options['genwoo_hide_shop_dropdown']) ? $this->options['genwoo_hide_shop_dropdown'] : false);
+		if($is_remove_dropdown){  
+			// Remove the action
+			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );				
+		}
+	}
+	
+	/**
+	* Single product breadcrumb
+	* @since 1.0.0
+	*/	
+	private function genwoo_single_product_bc(){
+		$is_single_product_bc = (isset($this->options['genwoo_single_product_bc']) ? $this->options['genwoo_single_product_bc'] : false);
+
+		if($is_single_product_bc){ 
+			add_filter( 'genesis_single_crumb', array($this,'genwoo_single_product_crumb'), 10, 2 );				
+		}
+	}
+	
+	/**
+	* Hide shop page title 
+	* @since 1.0.0
+	*/
+	private function genwoo_hide_shop_title(){
+		$is_hide_title = (isset($this->options['genwoo_hide_shop_title']) ? $this->options['genwoo_hide_shop_title'] : false);
+
+		if($is_hide_title){ 
+			add_filter( 'woocommerce_show_page_title' , array($this, 'genwoo_hide_shop_page_title') );				
+		}
+	}
+	
+	/**
+	* Shop page product breadcrumb
+	* @since 1.0.0
+	*/	
+	private function genwoo_shop_page_bc(){
+		$is_shop_page_bc = (isset($this->options['genwoo_shop_page_bc']) ? $this->options['genwoo_shop_page_bc'] : false);
+		if($is_shop_page_bc){ 
+			add_filter( 'genesis_archive_crumb', array($this,'genwoo_shop_page_crumb'), 10, 2 );				
+		}
+	}	
+	
 	/**
 	* Enable  studiopress Simple Sidebar support
 	* @since 1.0.0
@@ -161,7 +275,7 @@ class Genesis_Woocommerce_Public {
 		if($is_sp_ss_support){
 			add_post_type_support( 'product', array( 'genesis-simple-sidebars') );
 			if ( in_array( 'genesis-simple-sidebars/plugin.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ){
-				//require_once( GCW_SP_DIR . '/genesis-simple-sidebars.php' );
+				
 			}// Always end if properly - no short ends	
 		}
 	}
@@ -178,6 +292,179 @@ class Genesis_Woocommerce_Public {
 				//require_once( GCW_SP_DIR . '/genesis-simple-menus.php' );
 			}// Always end if properly - no short ends
 		}
+	}
+	
+	
+	/**
+	* This is a Callback function to Modify single product breadcrumb.
+	* 
+	* this method is being called from genwoo_single_product_bc()
+	* @since 1.0.0
+	*/
+	function genwoo_single_product_crumb($crumb, $args){
+		
+		if(is_woocommerce() && is_product()){
+			$crumb = '';
+			//var_dump(get_option( 'woocommerce_permalinks' ));
+			// shop page id
+			$shop_page_id = wc_get_page_id( 'shop' );
+			// shop page url
+			$shop_page_url = get_permalink( $shop_page_id );
+			// shop page title
+			$shop_page_title = get_the_title( $shop_page_id );			
+			// Check permalink
+			$permalinks   = get_option( 'woocommerce_permalinks' );
+			// Shop page object
+			$shop_page    = get_post( $shop_page_id );
+			// global post object
+			global $post;			
+			
+			if ( 'product' === get_post_type( $post ) ) {
+				// If permalinks contain the shop page in the URI prepend the breadcrumb with shop
+				if ( $shop_page_id && $shop_page && strstr( $permalinks['product_base'], '/' . $shop_page->post_name ) && get_option( 'page_on_front' ) != $shop_page_id ) {
+					$crumb = $this->add_crumb($crumb, '', get_the_title( $shop_page ), get_permalink( $shop_page ) );
+				}
+				if ( $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) ) ) {
+					$main_term = apply_filters( 'woocommerce_breadcrumb_main_term', $terms[0], $terms );					
+					$ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
+					$ancestors = array_reverse( $ancestors );			
+					foreach ( $ancestors as $ancestor ) {
+						$ancestor = get_term( $ancestor, $taxonomy );
+			
+						if ( ! is_wp_error( $ancestor ) && $ancestor ) {
+							$crumb = $this->add_crumb( $crumb,$args['sep'],  $ancestor->name, get_term_link( $ancestor ) );
+						}
+					}
+
+					$crumb = $this->add_crumb($crumb, $args['sep'], $main_term->name, get_term_link( $main_term ) );
+				}
+			} elseif ( 'post' != get_post_type( $post ) ) {
+				$post_type = get_post_type_object( get_post_type( $post ) );
+				$crumb = $this->add_crumb( $crumb, $args['sep'], $post_type->labels->singular_name, get_post_type_archive_link( get_post_type( $post ) ) );
+			} else {
+				$cat = current( get_the_category( $post ) );
+				if ( $cat ) {
+					$ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
+					$ancestors = array_reverse( $ancestors );			
+					foreach ( $ancestors as $ancestor ) {
+						$ancestor = get_term( $ancestor, $taxonomy );
+			
+						if ( ! is_wp_error( $ancestor ) && $ancestor ) {
+							$crumb = $this->add_crumb( $crumb, $args['sep'], $ancestor->name, get_term_link( $ancestor ) );
+						}
+					}
+					$crumb = $this->add_crumb($crumb,$args['sep'], $cat->name, get_term_link( $cat ) );
+				}
+			}			
+			$crumb = $this->add_crumb( $crumb, $args['sep'], get_the_title( $post ) );
+			// Reapply the filter
+			return apply_filters( 'gencwooc_single_product_crumb', $crumb, $args );
+		}
+		
+		return $crumb;
+	}
+	
+	
+	/**
+	* This is a Callback function to Modify Shop page breadcrumb.
+	* 
+	* this method is being called from genwoo_shop_page_bc()
+	* @since 1.0.0
+	*/
+	function genwoo_shop_page_crumb($crumb, $args){
+		if(is_woocommerce()){			
+			// shop page id
+			$shop_page_id = wc_get_page_id( 'shop' );
+			// shop page url
+			$shop_page_url = get_permalink( $shop_page_id );
+			// shop page title
+			$shop_page_title = get_the_title( $shop_page_id );			
+			// Check permalink
+			$permalinks   = get_option( 'woocommerce_permalinks' );
+			// Shop page object
+			$shop_page    = get_post( $shop_page_id );
+			
+			// if its a shop page
+			if(is_shop()){
+				if ( get_option( 'page_on_front' ) == wc_get_page_id( 'shop' ) ) {
+					return;
+				}
+		
+				$_name = wc_get_page_id( 'shop' ) ? get_the_title( wc_get_page_id( 'shop' ) ) : '';
+				
+				if ( ! $_name ) {
+					$product_post_type = get_post_type_object( 'product' );
+					$_name = $product_post_type->labels->singular_name;
+				}
+				$crumb = '';
+				$crumb = $this->add_crumb( $crumb, '', $_name, get_post_type_archive_link( 'product' ) );
+				
+				return apply_filters( 'gencwooc_product_archive_crumb', $crumb, $args );
+			}
+			
+			if(is_product_category() || is_product_tag()){
+				
+				$crumb = '';
+				// If permalinks contain the shop page in the URI prepend the breadcrumb with shop
+				if ( $shop_page_id && $shop_page && strstr( $permalinks['product_base'], '/' . $shop_page->post_name ) && get_option( 'page_on_front' ) != $shop_page_id ) {
+					$crumb = $this->add_crumb($crumb, '', get_the_title( $shop_page ), get_permalink( $shop_page ) );
+				}
+				$category_obj = $GLOBALS['wp_query']->get_queried_object();
+				if ($category_obj && 0 != $category_obj->parent && $category_obj->taxonomy === 'product_cat') {
+					$ancestors = get_ancestors( $category_obj->term_id, $category_obj->taxonomy );
+					$ancestors = array_reverse( $ancestors );
+				
+					foreach ( $ancestors as $ancestor ) {
+						$ancestor = get_term( $ancestor, $category_obj->taxonomy );
+			
+						if ( ! is_wp_error( $ancestor ) && $ancestor ) {
+							$crumb = $this->add_crumb($crumb, $args['sep'], $ancestor->name, get_term_link( $ancestor ) );
+						}
+					}
+					$crumb = $this->add_crumb($crumb, $args['sep'], single_cat_title( '', false ), get_category_link( $category_obj->term_id ) );
+				
+				}else{
+					
+					$crumb = $this->add_crumb($crumb, $args['sep'], single_cat_title( '', false ), get_category_link( $category_obj->term_id ) );
+				}
+		
+				return apply_filters( 'gencwooc_product_archive_crumb', $crumb, $args );
+		    }
+			
+			
+						
+		}		
+		
+		return $crumb;
+	}
+	
+	/**
+	 * Add a crumb so we don't get lost
+	 * 
+	 * Please check WC_Breadcrumb->add_crumb() method
+	 * This function is taken from Woocommerce class, Modified it for our requirements 
+	 * @param string $name
+	 * @param string $link
+	 * @since 1.0.0
+	 */
+	private function add_crumb( $crumb, $sep, $name, $link = '' ) {
+		if($link){
+			$crumb .= $sep.'<a href="'.$link.'">'.$name.'</a>';
+		}else{
+		    $crumb .= $sep.''.$name;
+		}
+		
+		return $crumb;
+	}
+	
+	/**
+	* This function removes the page title from shop page
+	*
+	* @return false to hide title
+	* @since 1.0.0
+	*/
+	function genwoo_hide_shop_page_title(){
+		return false;
 	}
 	
 }
