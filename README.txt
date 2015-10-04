@@ -1,9 +1,9 @@
-=== Connect Genesis WooCommerce ===
+=== WooCommerce With Genesis Theme ===
 Contributors: developersq
 Donate link: http://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
-Tested up to: Wordpress 4.3 & Genesis 2.2+ & WooCommerce 2.4+
+Tested up to: 4.3.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
