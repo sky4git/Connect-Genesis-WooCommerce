@@ -12,17 +12,18 @@ This plugin is built to connect Genesis child theme with WooCommerce just a bett
 
 == Description ==
 
-This plugin is built to connect Genesis child theme with WooCommerce just a better way.
+This plugin is built to connect Genesis child theme with Woocommerce just a better way.
+
 It provides options so that store setting can easily be managed in genesis websites. The plugin will override
 single-product.php and archive-product.php breadcrumbs if selected. 
 
 Other Plugin features:
 
-1. Enable WooCommerce support option
+1. Enable Woocommerce support option
 1. Enable Genesis layouts for product option
 1. Enable Genesis SEO support option
-1. Remove WooCommerce sidebar option
-1. Remove WooCommerce wrapper support option
+1. Remove woocommerce sidebar option
+1. Remove woocommerce wrapper support option
 1. Hide SKU in product page option
 1. Product description tab heading change option
 1. Hide Description/addtional information/review tab options
