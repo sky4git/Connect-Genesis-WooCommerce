@@ -1,5 +1,5 @@
 <?php
-
+namespace GenWoo;
 /**
  * The file that defines the core plugin class
  *

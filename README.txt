@@ -1,10 +1,10 @@
 === WooCommerce With Genesis Theme ===
 Contributors: developersq
-Donate link: http://www.developersq.com
+Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
 Tested up to: 4.4.0
-Stable tag: 1.0
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,11 +30,12 @@ Other Plugin features:
 1. Remove result count option
 1. Hide shop page title/sorting dropdown option
 1. Configure number of product in a row option
+1. Option to change 'Add to cart' text in shop and product page
 
 Please contribute in [gitHub](https://github.com/sky4git/connect-genesis-woocommerce "Connect Genesis WooCommerce").
 
 = Website =
-http://www.developersq.com/
+https://www.developersq.com/
 
 = Bug Submission and Forum Support =
 https://github.com/sky4git/connect-genesis-woocommerce/issues
@@ -66,6 +67,12 @@ No, But in most cases it uses wordpress standard hooks, so probably it will be g
 3. Shop page settings
 
 == Changelog ==
+
+= 2.0 =
+* UI update to Material Design.
+* Option for 'Add to cart' text change added.
+* Better checking for WooCommerce availability.
+* Plugin is now its in own namespace to limit or eliminate ambiguity.
 
 = 1.0 =
 * Plugin Released.

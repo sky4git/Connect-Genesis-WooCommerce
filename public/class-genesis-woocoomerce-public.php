@@ -1,5 +1,5 @@
 <?php
-
+namespace GenWoo;
 /**
  * The public-facing functionality of the plugin.
  *
@@ -83,10 +83,13 @@ class Genesis_Woocommerce_Public {
 		// remove product tabs
 		$this->genwoo_hide_products_tabs();
 		// check studiopress simple sidebar support
-		$this->genwoo_sp_ss_support();
+		//$this->genwoo_sp_ss_support();
 		// check studiopress simple menu support
-		$this->genwoo_sp_sm_support();
-
+		//$this->genwoo_sp_sm_support();
+		// change add to cart text - single product
+		$this->genwoo_add_to_cart_text_single();
+		// change add to cart text - archive/shop page
+		$this->genwoo_add_to_cart_text_archive();
 	}
 
 	/**
@@ -288,7 +291,7 @@ class Genesis_Woocommerce_Public {
 	* Enable  studiopress Simple Sidebar support
 	* @since 1.0.0
 	*/
-	private function genwoo_sp_ss_support(){
+	/*private function genwoo_sp_ss_support(){
 		$is_sp_ss_support = (isset($this->options['genwoo_checkbox_sp_ss_support']) ? $this->options['genwoo_checkbox_sp_ss_support'] : false);
 		if($is_sp_ss_support){
 			add_post_type_support( 'product', array( 'genesis-simple-sidebars') );
@@ -296,22 +299,44 @@ class Genesis_Woocommerce_Public {
 				
 			}// Always end if properly - no short ends	
 		}
-	}
+	}*/
 	
 	/**
 	* Enable studiopress Simple Menu support
 	* @since 1.0.0
 	*/
-	private function genwoo_sp_sm_support(){
+	/*private function genwoo_sp_sm_support(){
 		$is_sp_sm_support = (isset($this->options['genwoo_checkbox_sp_sm_support']) ? $this->options['genwoo_checkbox_sp_sm_support'] : false);
 		if($is_sp_sm_support){
 			add_post_type_support( 'product', array( 'genesis-simple-menus' ) );
 			if ( in_array( 'genesis-simple-menus/simple-menu.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ){
-				//require_once( GCW_SP_DIR . '/genesis-simple-menus.php' );
+				
 			}// Always end if properly - no short ends
 		}
-	}
+	}*/
 	
+	/**
+	* Change Add to cart text for - single product page
+	* @since 2.0.0
+	*/
+	private function genwoo_add_to_cart_text_single(){
+		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_single']) ? $this->options['genwoo_add_to_cart_text_single'] : false);
+		if($is_change_add_to_cart_text){
+			add_filter( 'woocommerce_product_single_add_to_cart_text', array($this, 'dq_woo_custom_cart_button_text'), 10 ); // 2.1 +
+		}
+	}
+
+	/**
+	* Change Add to cart text for - product archive page
+	* @since 2.0.0
+	*/
+	private function genwoo_add_to_cart_text_archive(){
+		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive']) ? $this->options['genwoo_add_to_cart_text_archive'] : false);
+		if($is_change_add_to_cart_text){
+			add_filter( 'woocommerce_product_add_to_cart_text', array($this, 'dq_woo_archive_custom_cart_button_text'), 10 ); // 2.1 +
+		}
+	}
+
 	
 	/**
 	* This is a Callback function to Modify single product breadcrumb.
@@ -547,5 +572,28 @@ class Genesis_Woocommerce_Public {
 		
 		return $tabs;
 	}
-	
+
+	/**
+	* This function changes the cart button text for single product
+	* @since 2.0.0
+	*/
+	function dq_woo_custom_cart_button_text(){
+		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_single']) ? $this->options['genwoo_add_to_cart_text_single'] : false);
+		if($add_to_cart_text){ 
+			return __( $add_to_cart_text, 'woocommerce' );
+		}
+		return 'Add to cart';
+	}
+
+	/**
+	* This function changes the cart button text for single product
+	* @since 2.0.0
+	*/
+	function dq_woo_archive_custom_cart_button_text(){
+		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive']) ? $this->options['genwoo_add_to_cart_text_archive'] : false);
+		if($add_to_cart_text){ 
+			return __( $add_to_cart_text, 'woocommerce' );
+		}
+		return 'Add to cart';
+	}
 }

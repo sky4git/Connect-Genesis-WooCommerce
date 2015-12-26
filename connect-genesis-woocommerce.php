@@ -1,7 +1,7 @@
 <?php
-
+namespace GenWoo;
 /**
- * Connect Genesis Woocommerce
+ * Genesis With WooCommerce
  *
  * This plugin is built to connect Genesis child theme with Woocommerce just a better way.
  * It provides options so that store setting can easily be managed in genesis websites. The plugin will override
@@ -18,6 +18,7 @@
  * 9: Remove result count option
  * 10: Hide shop page title/sorting dropdown option
  * 11: Configure number of product in a row option
+ * 12: Option to change add to cart text in shop page and in product page
  * 
  * Special (Many)thanks to provide plugin boilerplater for this. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  *
@@ -26,10 +27,10 @@
  * @package           connect_genesis_woocommerce
  *
  * @wordpress-plugin
- * Plugin Name:       Connect Genesis Woocommerce
+ * Plugin Name:       WooCommerce With Genesis Theme
  * Plugin URI:        http://www.developersq.com/
- * Description:       Connect your Genesis child theme better way with Woocommerce.
- * Version:           1.0.0
+ * Description:       Connect your Genesis child theme better way with WooCommerce.
+ * Version:           2.0
  * Author:            Aakash Dodiya
  * Author URI:        http://wwww.developersq.com/
  * License:           GPL-2.0+
@@ -61,8 +62,8 @@ function deactivate_genesis_woocoomerce() {
 	Genesis_Woocommerce_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_genesis_woocoomerce' );
-register_deactivation_hook( __FILE__, 'deactivate_genesis_woocoomerce' );
+register_activation_hook( __FILE__, '\GenWoo\activate_genesis_woocoomerce' );
+register_deactivation_hook( __FILE__, '\GenWoo\deactivate_genesis_woocoomerce' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -85,4 +86,4 @@ function run_genesis_woocoomerce() {
 	$plugin->run();
 
 }
-run_genesis_woocoomerce();
+\GenWoo\run_genesis_woocoomerce();
