@@ -1,5 +1,5 @@
 <?php
-
+namespace GenWoo;
 /**
  * Define the internationalization functionality
  *

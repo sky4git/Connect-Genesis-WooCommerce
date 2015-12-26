@@ -1,5 +1,5 @@
 <?php
-
+namespace GenWoo;
 /**
  * Register all actions and filters for the plugin
  *
@@ -48,9 +48,21 @@ class Genesis_Woocommerce_Loader {
 	 */
 	public function __construct() {
 
+		/** Fail silently if WooCommerce is not activated */
+		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ){
+			add_action( 'admin_notices', array($this, 'genwoo_admin_notice') );
+			//return;
+		}
+
 		$this->actions = array();
 		$this->filters = array();
 
+	}
+
+	public function genwoo_admin_notice(){
+		 $class = 'error';
+		 $message = 'Activate WooCommerce plugin to run WooCommerce with Genesis Theme plugin smoothly!';
+		 echo"<div class=\"$class\"> <p>$message</p></div>"; 
 	}
 
 	/**

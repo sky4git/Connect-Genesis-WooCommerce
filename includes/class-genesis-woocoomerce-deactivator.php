@@ -1,5 +1,5 @@
 <?php
-
+namespace GenWoo;
 /**
  * Fired during plugin deactivation
  *

@@ -2,11 +2,37 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
- .form-area{
-	  float: left; width:800px;
- }
- .linkdiv{
-	 float:right; width:200px; padding:10px; 
-	 text-align:center; margin-top:200px;
-	 background:#fff;
- }
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(fonts/Roboto-Light.ttf) format('ttf');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(fonts/Roboto-Regular.ttf) format('ttf');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(fonts/Roboto-Medium.ttf) format('ttf');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+.form-area{  float: left; width:650px; font-family:'Roboto', sans-serif;  }
+.form-table th{ width:500px; }
+label.mdl-switch{ width:50px; }
+.linkdiv{
+	 float:right; width:250px; padding:10px; 
+	 text-align:center; margin-top:100px;
+}
+input[type='text'], input[type='number']{
+   background:none; border:none;  box-shadow: none;
+}
+input[type='text']:focus, input[type='number']:focus{
+   box-shadow:none;
+}
