@@ -58,7 +58,11 @@ class Genesis_Woocommerce_Loader {
 		$this->filters = array();
 
 	}
-
+	
+	/**
+	* Show admin notice if WooCommerce is not activated
+	* @since 2.0
+	*/
 	public function genwoo_admin_notice(){
 		 $class = 'error';
 		 $message = 'Activate WooCommerce plugin to run WooCommerce with Genesis Theme plugin smoothly!';

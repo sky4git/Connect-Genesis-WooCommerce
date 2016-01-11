@@ -3,8 +3,8 @@ Contributors: developersq
 Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
-Tested up to: 4.4.0
-Stable tag: 2.0
+Tested up to: 4.4.1
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,11 +68,16 @@ No, But in most cases it uses wordpress standard hooks, so probably it will be g
 
 == Changelog ==
 
+= 2.1 =
+* Replace add_object_page method with add_menu_page to remain compatible with WordPress 4.5
+* Other minor housekeeping 
+
 = 2.0 =
 * UI update to Material Design.
 * Option for 'Add to cart' text change added.
 * Better checking for WooCommerce availability.
 * Plugin is now its in own namespace to limit or eliminate ambiguity.
+* Plugin now requires PHP version 5.5 at least.
 
 = 1.0 =
 * Plugin Released.
