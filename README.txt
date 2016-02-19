@@ -71,7 +71,7 @@ No, But in most cases it uses wordpress standard hooks, so probably it will be g
 == Changelog ==
 
 = 3.0 =
-* Enabled opetion to remove woocommerce breadcrumbs.
+* Enabled an option to remove woocommerce breadcrumbs.
 * Options are added for Additional information/review tab heading change.
 
 = 2.1 =
