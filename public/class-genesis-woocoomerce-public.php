@@ -355,7 +355,6 @@ class Genesis_Woocommerce_Public {
 		
 		if(is_woocommerce() && is_product()){
 			$crumb = '';
-			//var_dump(get_option( 'woocommerce_permalinks' ));
 			// shop page id
 			$shop_page_id = wc_get_page_id( 'shop' );
 			// shop page url
