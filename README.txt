@@ -3,8 +3,8 @@ Contributors: developersq
 Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
-Tested up to: 4.4.1
-Stable tag: 2.1
+Tested up to: 4.4.2
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,8 @@ Other Plugin features:
 1. Hide shop page title/sorting dropdown option
 1. Configure number of product in a row option
 1. Option to change 'Add to cart' text in shop and product page
+1. Change Description/Additional information/ review tab heading
+1. Option to enable/disable woocommercer breadcrumbs
 
 Please contribute in [gitHub](https://github.com/sky4git/connect-genesis-woocommerce "Connect Genesis WooCommerce").
 
@@ -54,7 +56,7 @@ e.g.
 
 = Should I Activate WooCoommerce before activating this plugin? =
 
-Yes, Please.
+Yes, Please. 
 
 = Is this plugin been tested with non-Genesis themes? =
 
@@ -67,6 +69,10 @@ No, But in most cases it uses wordpress standard hooks, so probably it will be g
 3. Shop page settings
 
 == Changelog ==
+
+= 3.0 =
+* Enabled opetion to remove woocommerce breadcrumbs.
+* Options are added for Additional information/review tab heading change.
 
 = 2.1 =
 * Replace add_object_page method with add_menu_page to remain compatible with WordPress 4.5

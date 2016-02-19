@@ -24,7 +24,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 .form-area{  float: left; width:650px; font-family:'Roboto', sans-serif;  }
-.form-table th{ width:500px; }
+.form-table th{ width:500px; vertical-align: middle; }
 label.mdl-switch{ width:50px; }
 .linkdiv{
 	 float:right; width:250px; padding:10px; 

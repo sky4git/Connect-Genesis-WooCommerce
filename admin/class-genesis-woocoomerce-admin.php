@@ -183,6 +183,15 @@ class Genesis_Woocommerce_Admin {
 			'genwoo_settings', 
 			'genwoo_general_section' 
 		);
+		// Remove woocommerce menu
+		add_settings_field( 
+			'genwoo_remove_woo_bc', 
+			__( 'Remove woocommerce breadcrumbs', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_remove_woo_bc_render'), 
+			'genwoo_settings', 
+			'genwoo_general_section' 
+		);
+
 		
 		//*--------------------------- WOOCOMMERCE SINGLE PRODUCT SECTION --------------------------*//
 		add_settings_section(
@@ -194,7 +203,7 @@ class Genesis_Woocommerce_Admin {
 		// Single Product breadcrumbs 
 		add_settings_field( 
 			'genwoo_single_product_bc', 
-			__( 'Modify single product breadcrumb', 'genesis-woocommerce' ), 
+			__( 'Modify single product Genesis breadcrumbs', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_single_product_bc_render'), 
 			'genwoo_settings', 
 			'genwoo_woo_product_section' 
@@ -212,6 +221,22 @@ class Genesis_Woocommerce_Admin {
 			'genwoo_description_tab_heading', 
 			__( 'Product description tab heading', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_description_tab_heading_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Additional information tab heading
+		add_settings_field( 
+			'genwoo_addinfo_tab_heading', 
+			__( 'Additional information tab heading', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_addinfo_tab_heading_render'), 
+			'genwoo_settings', 
+			'genwoo_woo_product_section' 
+		);
+		// Review tab heading
+		add_settings_field( 
+			'genwoo_review_tab_heading', 
+			__( 'Review tab heading', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_review_tab_heading_render'), 
 			'genwoo_settings', 
 			'genwoo_woo_product_section' 
 		);
@@ -257,7 +282,7 @@ class Genesis_Woocommerce_Admin {
 		// Shop page breadcrumbs - Modify shop page/product category breadcrumb Genesis way 
 		add_settings_field( 
 			'genwoo_shop_page_bc', 
-			__( 'Modify Shop page breadcrumb', 'genesis-woocommerce' ), 
+			__( 'Modify Shop page Genesis breadcrumbs', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_shop_page_bc_render'), 
 			'genwoo_settings', 
 			'genwoo_woo_shop_section' 
@@ -360,6 +385,18 @@ class Genesis_Woocommerce_Admin {
 		<?php
 	}
 	
+	// Remove woocommerce breadcrumbs
+	function genwoo_remove_woo_bc_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="genwoo_settings[genwoo_remove_woo_bc]">
+			<input type='checkbox' class='mdl-switch__input' id='genwoo_settings[genwoo_remove_woo_bc]' name='genwoo_settings[genwoo_remove_woo_bc]' <?php (isset($options['genwoo_remove_woo_bc']) ? checked( $options['genwoo_remove_woo_bc'], 1 ) : ''); ?> value='1'>
+			<span class="mdl-switch__label"></span>
+		</label>		
+		<?php
+	}
+
+
 	// Single product breadcrumb modify
 	function genwoo_single_product_bc_render(){
 		$options = get_option( 'genwoo_settings' );
@@ -447,7 +484,28 @@ class Genesis_Woocommerce_Admin {
 		</div>	
 		<?php
 	}
-	
+
+	// additional information tab heading
+	function genwoo_addinfo_tab_heading_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_addinfo_tab_heading]' name='genwoo_settings[genwoo_addinfo_tab_heading]'  value='<?php echo (isset($options['genwoo_addinfo_tab_heading']) ?  $options['genwoo_addinfo_tab_heading'] : 'Additional Information'); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_addinfo_tab_heading]">Additional Information</label>
+		</div>	
+		<?php
+	}
+
+	// review tab heading
+	function genwoo_review_tab_heading_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_review_tab_heading]' name='genwoo_settings[genwoo_review_tab_heading]'  value='<?php echo (isset($options['genwoo_review_tab_heading']) ?  $options['genwoo_review_tab_heading'] : 'Reviews'); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_review_tab_heading]">Reviews</label>
+		</div>	
+		<?php
+	}
 	// hide product description tab
 	function genwoo_hide_description_tab_render(){
 		$options = get_option( 'genwoo_settings' );

@@ -78,8 +78,8 @@ class Genesis_Woocommerce_Public {
 		$this->genwoo_configure_shop_row_products();
 		// hide sku in single product
 		$this->genwoo_single_product_hide_sku();
-		// product description heading
-		$this->genwoo_description_tab_heading();
+		// additioanl information/review tab headings
+		$this->genwoo_product_tab_headings();
 		// remove product tabs
 		$this->genwoo_hide_products_tabs();
 		// check studiopress simple sidebar support
@@ -120,12 +120,18 @@ class Genesis_Woocommerce_Public {
 	* We just need genesis breadcrumb so there is no need of woocommece breadcrumb
 	*
 	* @since 1.0.0
+	* @modified 3.0
 	*/
 	public function genwoo_remove_breadcrumb(){
-		// Remove Woocommerce breadcrumb from the equation in the begginng
-		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+		$is_woo_bc_removed = (isset($this->options['genwoo_remove_woo_bc']) ? $this->options['genwoo_remove_woo_bc'] : false);
+		if($is_woo_bc_removed){
+			// Remove Woocommerce breadcrumb from the equation in the begginng
+			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+		}		
+		
+		
 	}
-	
+
 	/**
 	* Declare woocommerce support
 	* @since 1.0.0
@@ -248,11 +254,12 @@ class Genesis_Woocommerce_Public {
 	}
 	
 	/**
-	* Product description heading
-	* @since 1.0.0
+	* Additional information tab heading
+	* @since 3.0
+	* @reference https://docs.woothemes.com/document/editing-product-data-tabs/#doc-title
 	*/
-	private function genwoo_description_tab_heading(){
-		add_filter( 'woocommerce_product_description_heading', array($this, 'genwoo_product_description_tab_heading'), 10, 1 );
+	private function genwoo_product_tab_headings(){
+		add_filter( 'woocommerce_product_tabs', array( $this, 'genwoo_product_tab_headings_change'), 98, 1);
 	}
 	
 	/**
@@ -535,7 +542,38 @@ class Genesis_Woocommerce_Public {
 		return $enabled;
 	}
 	
-	
+
+	/**
+	* This function changes the product tabs heading for additional information and review tabs
+	*
+	* @since 3.0
+	* @reference https://docs.woothemes.com/document/editing-product-data-tabs/#doc-title
+	*/
+	function genwoo_product_tab_headings_change($tabs){
+		$description_heading = (isset($this->options['genwoo_description_tab_heading']) ? $this->options['genwoo_description_tab_heading'] : false);
+		if($description_heading){ 
+			$tabs['description']['title'] = $description_heading;   // Rename the description 
+			// calling filter function to change heading too
+			add_filter( 'woocommerce_product_description_heading', array($this, 'genwoo_product_description_tab_heading'), 10, 1 );
+		}
+		$addinfo_tab_heading = (isset($this->options['genwoo_addinfo_tab_heading']) ? $this->options['genwoo_addinfo_tab_heading'] : false);
+		if($addinfo_tab_heading){
+			$tabs['additional_information']['title'] = $addinfo_tab_heading;   // Rename the additional information tab
+			// calling filter function to change heading too
+			add_filter( 'woocommerce_product_additional_information_heading', array($this, 'genwoo_product_additional_info_tab_heading'), 10, 1 );
+		}
+
+		$review_tab_heading = (isset($this->options['genwoo_review_tab_heading']) ? $this->options['genwoo_review_tab_heading'] : false);
+		if($review_tab_heading){
+			$tabs['reviews']['title'] = $review_tab_heading;   // Rename the additional information tab
+			// there is no filter to change review tab heading
+			// check file single-product-review.php for filters in woocommerce
+			// community support will be appriciated 
+		}
+
+		return $tabs;
+	}
+
 	/**
 	* This function changes the product descriptin heading
 	*
@@ -548,7 +586,20 @@ class Genesis_Woocommerce_Public {
 		}
 		return $title;
 	}
-	
+
+	/**
+	* This function change product additional information tab heading
+	*
+	* @since 3.0
+	*/
+	function genwoo_product_additional_info_tab_heading($title){
+		$addinfo_tab_heading = (isset($this->options['genwoo_addinfo_tab_heading']) ? $this->options['genwoo_addinfo_tab_heading'] : false);
+		if($addinfo_tab_heading){
+			return $addinfo_tab_heading;
+		}
+		return $title;
+	}
+
 	/**
 	* This function removes the product tabs
 	*
