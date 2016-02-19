@@ -80,7 +80,7 @@ class Genesis_Woocommerce_Public {
 		$this->genwoo_single_product_hide_sku();
 		// additioanl information/review tab headings
 		$this->genwoo_product_tab_headings();
-		// remove product tabs
+		// remove product tabs - Fixes #1
 		$this->genwoo_hide_products_tabs();
 		// check studiopress simple sidebar support
 		//$this->genwoo_sp_ss_support();
