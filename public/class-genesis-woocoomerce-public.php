@@ -250,7 +250,7 @@ class Genesis_Woocommerce_Public {
 	* @since 1.0.0
 	*/
 	private function genwoo_single_product_hide_sku(){
-		add_filter( 'wc_product_sku_enabled', array($this,'genwoo_remove_product_page_sku'), 10, 1);				
+		add_filter( 'wc_product_sku_enabled', array($this,'genwoo_remove_product_page_sku'), 10, 1 );				
 	}
 	
 	/**
@@ -259,15 +259,15 @@ class Genesis_Woocommerce_Public {
 	* @reference https://docs.woothemes.com/document/editing-product-data-tabs/#doc-title
 	*/
 	private function genwoo_product_tab_headings(){
-		add_filter( 'woocommerce_product_tabs', array( $this, 'genwoo_product_tab_headings_change'), 98, 1);
+		add_filter( 'woocommerce_product_tabs', array( $this, 'genwoo_product_tab_headings_change' ), 98, 1 );
 	}
 	
 	/**
-	* This function helps to hide differnt product tabs
+	* This function helps to hide different product tabs
 	* @since 1.0.0
 	*/
 	private function genwoo_hide_products_tabs(){
-		add_filter( 'woocommerce_product_tabs', array($this, 'genwoo_remove_product_tabs'), 30, 1 );
+		add_filter( 'woocommerce_product_tabs', array( $this, 'genwoo_remove_product_tabs' ), 99, 1 );
 	}
 	
 	
@@ -549,25 +549,32 @@ class Genesis_Woocommerce_Public {
 	* @reference https://docs.woothemes.com/document/editing-product-data-tabs/#doc-title
 	*/
 	function genwoo_product_tab_headings_change($tabs){
-		$description_heading = (isset($this->options['genwoo_description_tab_heading']) ? $this->options['genwoo_description_tab_heading'] : false);
+		$description_heading = (isset($this->options['genwoo_description_tab_heading']) ? $this->options['genwoo_description_tab_heading'] : false );
 		if($description_heading){ 
-			$tabs['description']['title'] = $description_heading;   // Rename the description 
-			// calling filter function to change heading too
-			add_filter( 'woocommerce_product_description_heading', array($this, 'genwoo_product_description_tab_heading'), 10, 1 );
-		}
-		$addinfo_tab_heading = (isset($this->options['genwoo_addinfo_tab_heading']) ? $this->options['genwoo_addinfo_tab_heading'] : false);
-		if($addinfo_tab_heading){
-			$tabs['additional_information']['title'] = $addinfo_tab_heading;   // Rename the additional information tab
-			// calling filter function to change heading too
-			add_filter( 'woocommerce_product_additional_information_heading', array($this, 'genwoo_product_additional_info_tab_heading'), 10, 1 );
+			if(isset($tabs['description'])){
+				$tabs['description']['title'] = $description_heading;   // Rename the description 
+				// calling filter function to change heading too
+				add_filter( 'woocommerce_product_description_heading', array($this, 'genwoo_product_description_tab_heading'), 10, 1 );
+			}
 		}
 
-		$review_tab_heading = (isset($this->options['genwoo_review_tab_heading']) ? $this->options['genwoo_review_tab_heading'] : false);
+		$addinfo_tab_heading = (isset($this->options['genwoo_addinfo_tab_heading']) ? $this->options['genwoo_addinfo_tab_heading'] : false );
+		if($addinfo_tab_heading){
+			if(isset($tabs['additional_information'])){
+				$tabs['additional_information']['title'] = $addinfo_tab_heading;   // Rename the additional information tab
+				// calling filter function to change heading too
+				add_filter( 'woocommerce_product_additional_information_heading', array($this, 'genwoo_product_additional_info_tab_heading'), 10, 1 );
+			}			
+		}
+
+		$review_tab_heading = (isset($this->options['genwoo_review_tab_heading']) ? $this->options['genwoo_review_tab_heading'] : false );
 		if($review_tab_heading){
-			$tabs['reviews']['title'] = $review_tab_heading;   // Rename the additional information tab
-			// there is no filter to change review tab heading
-			// check file single-product-review.php for filters in woocommerce
-			// community support will be appriciated 
+			if(isset($tabs['reviews'])){
+				$tabs['reviews']['title'] = $review_tab_heading;   // Rename the additional information tab
+				// there is no filter to change review tab heading
+				// check file single-product-review.php for filters in woocommerce
+				// community support will be appriciated 
+			}
 		}
 
 		return $tabs;
@@ -605,6 +612,7 @@ class Genesis_Woocommerce_Public {
 	* @since 1.0.0
 	*/
 	function genwoo_remove_product_tabs($tabs){
+		
 		$remove_description_tab = (isset($this->options['genwoo_hide_description_tab']) ? $this->options['genwoo_hide_description_tab'] : false);
 		if($remove_description_tab){
 			unset( $tabs['description'] );  // Remove the description tab

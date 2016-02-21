@@ -4,7 +4,7 @@ Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
 Tested up to: 4.4.2
-Stable tag: 3.0
+Stable tag: 3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,8 +70,11 @@ No, But in most cases it uses wordpress standard hooks, so probably it will be g
 
 == Changelog ==
 
+= 3.1 =
+* Bug fixed: Notice error was appearing when there was no additional information data available to show on product page. Added additional checks to verify array entries exists for product tabs.  https://github.com/sky4git/Connect-Genesis-WooCommerce/issues/2
+
 = 3.0 =
-* Enabled an option to remove woocommerce breadcrumbs.
+* Enabled an option to remove woocommerce breadcrumbs. https://github.com/sky4git/Connect-Genesis-WooCommerce/issues/1
 * Options are added for Additional information/review tab heading change.
 
 = 2.1 =
