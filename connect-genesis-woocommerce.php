@@ -27,14 +27,14 @@ namespace GenWoo;
  * @package           connect_genesis_woocommerce
  *
  * @wordpress-plugin
- * Plugin Name:       WooCommerce With Genesis Theme
+ * Plugin Name:       WooCommerce with Genesis theme
  * Plugin URI:        http://www.developersq.com/
  * Description:       Connect your Genesis child theme better way with WooCommerce.
  * Version:           3.1
  * Author:            Aakash Dodiya
  * Author URI:        http://wwww.developersq.com/
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License:           GPL-3.0
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       genesis-woocommerce
  * Domain Path:       /languages
  */
