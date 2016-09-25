@@ -69,11 +69,12 @@ class Genesis_Woocommerce {
 	public function __construct() {
 
 		$this->genesis_woocoomerce = 'genesis-woocoomerce';
-		$this->version = '3.1';
+		$this->version = '4.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		//$this->define_admin_filters();
 		$this->define_public_hooks();
 
 	}
@@ -171,8 +172,8 @@ class Genesis_Woocommerce {
 
 		$plugin_public = new Genesis_Woocommerce_Public( $this->get_genesis_woocoomerce(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		//$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		//$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_breadcrumb' );
 		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_sidebar' );
 		$this->loader->add_action( 'get_header', $plugin_public, 'genwoo_remove_wrapper_before' );

@@ -51,7 +51,7 @@ class Genesis_Woocommerce_Loader {
 		/** Fail silently if WooCommerce is not activated */
 		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ){
 			add_action( 'admin_notices', array($this, 'genwoo_admin_notice') );
-			//return;
+			return;
 		}
 
 		$this->actions = array();

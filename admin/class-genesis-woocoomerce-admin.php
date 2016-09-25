@@ -73,11 +73,11 @@ class Genesis_Woocommerce_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles() { 
 		/** @var \WP_Screen $screen */
-    	$screen = get_current_screen();
+    	$screen = get_current_screen(); 
 		// load the styles for the current page only
-		if ( 'toplevel_page_genesis-woocommerce' === $screen->base ){ 
+		if ( 'woocommerce_page_genesis-woocommerce' === $screen->base ){ 
 			wp_enqueue_style( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'css/genesis-woocoomerce-admin.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'material', plugin_dir_url( __FILE__ ) . 'css/material.min.css', array(), $this->version, 'all' );
 		}
@@ -93,7 +93,7 @@ class Genesis_Woocommerce_Admin {
 		/** @var \WP_Screen $screen */
     	$screen = get_current_screen();
 		// load the scripts for the current page only
-		if ( 'toplevel_page_genesis-woocommerce' === $screen->base ){
+		if ( 'woocommerce_page_genesis-woocommerce' === $screen->base ){
 			wp_enqueue_script( $this->genesis_woocoomerce, plugin_dir_url( __FILE__ ) . 'js/genesis-woocoomerce-admin.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( 'material', plugin_dir_url( __FILE__ ) . 'js/material.min.js', '', $this->version, false );		
 		}
@@ -108,12 +108,9 @@ class Genesis_Woocommerce_Admin {
 	public function genwoo_create_menu() {
 
 		/**
-		 * This function creates plguin's setting menu page in admin
+		 * This function creates plguin's setting menu page in admin - under woocommerce
 		 */
-		add_menu_page( __( 'WooCommerce + Genesis Settings', 'genesis-woocommerce' ),
-		__( 'WooCommerce + Genesis Settings', 'genesis-woocommerce' ),
-		'administrator', 'genesis-woocommerce',
-		array( $this, 'genwoo_settings_page' ), 'dashicons-share-alt', 79.9 );
+		add_submenu_page( 'woocommerce', 'WooCommerce + Genesis Settings', 'WooCommerce + Genesis Settings', 'manage_options', 'genesis-woocommerce', array( $this, 'genwoo_settings_page' ) );
 
 	}
 	
@@ -188,6 +185,22 @@ class Genesis_Woocommerce_Admin {
 			'genwoo_remove_woo_bc', 
 			__( 'Remove woocommerce breadcrumbs', 'genesis-woocommerce' ), 
 			array($this, 'genwoo_remove_woo_bc_render'), 
+			'genwoo_settings', 
+			'genwoo_general_section' 
+		);
+		// return to shop url
+		add_settings_field( 
+			'genwoo_return_to_shop_url', 
+			__( 'Return to Shop url', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_return_to_shop_url_render'), 
+			'genwoo_settings', 
+			'genwoo_general_section' 
+		);
+		// continue shopping url
+		add_settings_field( 
+			'genwoo_continue_shopping_url', 
+			__( 'Continue shopping url', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_continue_shopping_url_render'), 
 			'genwoo_settings', 
 			'genwoo_general_section' 
 		);
@@ -396,6 +409,27 @@ class Genesis_Woocommerce_Admin {
 		<?php
 	}
 
+	// Return to shop button url
+	function genwoo_return_to_shop_url_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_return_to_shop_url]' name='genwoo_settings[genwoo_return_to_shop_url]'  value='<?php echo (isset($options['genwoo_return_to_shop_url']) ?  $options['genwoo_return_to_shop_url'] : ''); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_return_to_shop_url]">Return to shop button url...</label>
+		</div>	
+		<?php
+	}
+
+	// continue shopping button url
+	function genwoo_continue_shopping_url_render(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_continue_shopping_url]' name='genwoo_settings[genwoo_continue_shopping_url]'  value='<?php echo (isset($options['genwoo_continue_shopping_url']) ?  $options['genwoo_continue_shopping_url'] : ''); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_continue_shopping_url]">Continue shopping button url...</label>
+		</div>	
+		<?php
+	}
 
 	// Single product breadcrumb modify
 	function genwoo_single_product_bc_render(){

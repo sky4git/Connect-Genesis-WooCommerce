@@ -90,6 +90,10 @@ class Genesis_Woocommerce_Public {
 		$this->genwoo_add_to_cart_text_single();
 		// change add to cart text - archive/shop page
 		$this->genwoo_add_to_cart_text_archive();
+		// change return to shop button url
+		$this->genwoo_return_to_shop_url();
+		// Continue shopping url
+		$this->genwoo_continue_shopping_url();
 	}
 
 	/**
@@ -653,5 +657,45 @@ class Genesis_Woocommerce_Public {
 			return __( $add_to_cart_text, 'woocommerce' );
 		}
 		return 'Add to cart';
+	}
+
+	/**
+	* This function checks whether the return to shop button url is set in admin
+	* @since 4.0
+	*/
+	function genwoo_return_to_shop_url(){
+		$return_to_shop_url = (isset($this->options['genwoo_return_to_shop_url']) ? $this->options['genwoo_return_to_shop_url'] : false);
+		if($return_to_shop_url){ 
+			add_filter( 'woocommerce_return_to_shop_redirect', array( $this, 'genwoo_empty_cart_redirect_url' ) );
+		}
+	}
+
+	/**
+	* This function changes return to shop button url
+	* @since 4.0
+	*/
+	function genwoo_empty_cart_redirect_url(){
+		$return_to_shop_url = (isset($this->options['genwoo_return_to_shop_url']) ? $this->options['genwoo_return_to_shop_url'] : false);
+		return $return_to_shop_url;
+	}
+
+	/**
+	* This function checks whether the continue shop button url is set in admin
+	* @since 4.0
+	*/
+	function genwoo_continue_shopping_url(){
+		$continue_shopping_url = (isset($this->options['genwoo_continue_shopping_url']) ? $this->options['genwoo_continue_shopping_url'] : false);
+		if($continue_shopping_url){ 
+			add_filter( 'woocommerce_continue_shopping_redirect', array( $this, 'genwoo_woocommerce_continue_shopping_redirect' ) );
+		}
+	}
+
+	/**
+	* This function changes continue shopping button url
+	* @since 4.0
+	*/
+	function genwoo_woocommerce_continue_shopping_redirect() {
+		$continue_shopping_url = (isset($this->options['genwoo_continue_shopping_url']) ? $this->options['genwoo_continue_shopping_url'] : false);
+		return $continue_shopping_url;
 	}
 }
