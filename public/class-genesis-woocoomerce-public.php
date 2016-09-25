@@ -88,8 +88,14 @@ class Genesis_Woocommerce_Public {
 		//$this->genwoo_sp_sm_support();
 		// change add to cart text - single product
 		$this->genwoo_add_to_cart_text_single();
-		// change add to cart text - archive/shop page
-		$this->genwoo_add_to_cart_text_archive();
+		// change add to cart text - archive/shop page - for SIMPLE product
+		$this->genwoo_add_to_cart_text_archive_simple();
+		// change add to cart text - archive/shop page - for EXTERNAL product
+		$this->genwoo_add_to_cart_text_archive_external();
+		// change add to cart text - archive/shop page - for GROUPED product
+		$this->genwoo_add_to_cart_text_archive_grouped();
+		// change add to cart text - archive/shop page - for VARIABLE product
+		$this->genwoo_add_to_cart_text_archive_variable();
 		// change return to shop button url
 		$this->genwoo_return_to_shop_url();
 		// Continue shopping url
@@ -338,16 +344,48 @@ class Genesis_Woocommerce_Public {
 	}
 
 	/**
-	* Change Add to cart text for - product archive page
-	* @since 2.0.0
+	* Change Add to cart text for - product archive page - for SIMPLE product type
+	* @since 4.0
 	*/
-	private function genwoo_add_to_cart_text_archive(){
-		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive']) ? $this->options['genwoo_add_to_cart_text_archive'] : false);
+	private function genwoo_add_to_cart_text_archive_simple(){
+		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_simple']) ? $this->options['genwoo_add_to_cart_text_archive_simple'] : false);
 		if($is_change_add_to_cart_text){
-			add_filter( 'woocommerce_product_add_to_cart_text', array($this, 'dq_woo_archive_custom_cart_button_text'), 10 ); // 2.1 +
+			add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'dq_woo_archive_custom_cart_button_text_simple' ), 10 ); // 2.1 +
 		}
 	}
 
+	/**
+	* Change Add to cart text for - product archive page - for EXTERNAL product type
+	* @since 4.0
+	*/
+	private function genwoo_add_to_cart_text_archive_external(){
+		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_external']) ? $this->options['genwoo_add_to_cart_text_archive_external'] : false);
+		if($is_change_add_to_cart_text){
+			add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'dq_woo_archive_custom_cart_button_text_external' ), 10, 2 ); // 2.1 +
+		}
+	}
+
+	/**
+	* Change Add to cart text for - product archive page - for GROUPED product type
+	* @since 4.0
+	*/
+	private function genwoo_add_to_cart_text_archive_grouped(){
+		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_grouped']) ? $this->options['genwoo_add_to_cart_text_archive_grouped'] : false);
+		if($is_change_add_to_cart_text){
+			add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'dq_woo_archive_custom_cart_button_text_grouped' ), 10 ); // 2.1 +
+		}
+	}
+
+	/**
+	* Change Add to cart text for - product archive page - for VARIABLE product type
+	* @since 4.0
+	*/
+	private function genwoo_add_to_cart_text_archive_variable(){
+		$is_change_add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_variable']) ? $this->options['genwoo_add_to_cart_text_archive_variable'] : false);
+		if($is_change_add_to_cart_text){
+			add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'dq_woo_archive_custom_cart_button_text_variable' ), 10 ); // 2.1 +
+		}
+	}
 	
 	/**
 	* This is a Callback function to Modify single product breadcrumb.
@@ -648,13 +686,66 @@ class Genesis_Woocommerce_Public {
 	}
 
 	/**
-	* This function changes the cart button text for single product
-	* @since 2.0.0
+	* This function changes the cart button text for SIMPLE product
+	* @since 4.0
 	*/
-	function dq_woo_archive_custom_cart_button_text(){
-		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive']) ? $this->options['genwoo_add_to_cart_text_archive'] : false);
+	function dq_woo_archive_custom_cart_button_text_simple(){
+		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_simple']) ? $this->options['genwoo_add_to_cart_text_archive_simple'] : false);
 		if($add_to_cart_text){ 
-			return __( $add_to_cart_text, 'woocommerce' );
+			global $product;
+			// get product type	
+			$product_type = $product->product_type;
+			if($product_type === 'simple'):
+				return __( $add_to_cart_text, 'woocommerce' );
+			endif;
+		}
+		return 'Add to cart';
+	}
+
+	/**
+	* This function changes the cart button text for EXTERNAL product
+	* @since 4.0
+	*/
+	function dq_woo_archive_custom_cart_button_text_external( $button_text, $product ){
+		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_external']) ? $this->options['genwoo_add_to_cart_text_archive_external'] : false);
+		if($add_to_cart_text){ 
+			if( $product->get_type() == 'external' ):
+				return __( $add_to_cart_text, 'woocommerce' );
+			endif;
+		}
+		return $button_text;
+	}
+
+	/**
+	* This function changes the cart button text for GROUPED product
+	* @since 4.0
+	*/
+	function dq_woo_archive_custom_cart_button_text_grouped(){
+		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_grouped']) ? $this->options['genwoo_add_to_cart_text_archive_grouped'] : false);
+		if($add_to_cart_text){ 
+			global $product;
+			// get product type	
+			$product_type = $product->product_type;
+			if($product_type === 'grouped'):
+				return __( $add_to_cart_text, 'woocommerce' );
+			endif;
+		}
+		return 'Add to cart';
+	}
+
+	/**
+	* This function changes the cart button text for VARIABLE product
+	* @since 4.0
+	*/
+	function dq_woo_archive_custom_cart_button_text_variable(){
+		$add_to_cart_text = (isset($this->options['genwoo_add_to_cart_text_archive_variable']) ? $this->options['genwoo_add_to_cart_text_archive_variable'] : false);
+		if($add_to_cart_text){ 
+			global $product;
+			// get product type	
+			$product_type = $product->product_type;
+			if($product_type === 'variable'):
+				return __( $add_to_cart_text, 'woocommerce' );
+			endif;
 		}
 		return 'Add to cart';
 	}

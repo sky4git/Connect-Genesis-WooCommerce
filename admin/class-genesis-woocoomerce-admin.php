@@ -332,11 +332,35 @@ class Genesis_Woocommerce_Admin {
 			'genwoo_settings', 
 			'genwoo_woo_shop_section' 
 		);
-		// Change Add to cart button text for product archive
+		// Change Add to cart button text for product archive - SIMPLE product
 		add_settings_field( 
-			'genwoo_add_to_cart_text_archive', 
-			__( 'Change Add to cart text for shop/archive page', 'genesis-woocommerce' ), 
-			array($this, 'genwoo_add_to_cart_text_archive_render'), 
+			'genwoo_add_to_cart_text_archive_simple', 
+			__( 'Change Add to cart text for simple product', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_add_to_cart_text_archive_render_simple'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);
+		// Change Add to cart button text for product archive - EXTERNAL product
+		add_settings_field( 
+			'genwoo_add_to_cart_text_archive_external', 
+			__( 'Change Add to cart text for external product', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_add_to_cart_text_archive_render_external'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);
+		// Change Add to cart button text for product archive - GROUPED product
+		add_settings_field( 
+			'genwoo_add_to_cart_text_archive_grouped', 
+			__( 'Change Add to cart text for grouped product', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_add_to_cart_text_archive_render_grouped'), 
+			'genwoo_settings', 
+			'genwoo_woo_shop_section' 
+		);
+		// Change Add to cart button text for product archive - VARIABLE product
+		add_settings_field( 
+			'genwoo_add_to_cart_text_archive_variable', 
+			__( 'Change Add to cart text for variable product', 'genesis-woocommerce' ), 
+			array($this, 'genwoo_add_to_cart_text_archive_render_variable'), 
 			'genwoo_settings', 
 			'genwoo_woo_shop_section' 
 		);
@@ -584,13 +608,46 @@ class Genesis_Woocommerce_Admin {
 		<?php	
 	}
 
-	// Change Add to cart text - archive product
-	function genwoo_add_to_cart_text_archive_render(){
+	// Change Add to cart text - archive product - SIMPLE
+	function genwoo_add_to_cart_text_archive_render_simple(){
 		$options = get_option( 'genwoo_settings' );
 		?>
 		<div class="mdl-textfield mdl-js-textfield">
-			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_add_to_cart_text_archive]' name='genwoo_settings[genwoo_add_to_cart_text_archive]'  value='<?php echo (isset($options['genwoo_add_to_cart_text_archive']) ?  $options['genwoo_add_to_cart_text_archive'] : ''); ?>'>
-			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_add_to_cart_text_archive]">Add to cart</label>
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_add_to_cart_text_archive_simple]' name='genwoo_settings[genwoo_add_to_cart_text_archive_simple]'  value='<?php echo (isset($options['genwoo_add_to_cart_text_archive_simple']) ?  $options['genwoo_add_to_cart_text_archive_simple'] : ''); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_add_to_cart_text_archive_simple]">Add to cart</label>
+		</div>		
+		<?php	
+	}
+
+	// Change Add to cart text - archive product - EXTERNAL
+	function genwoo_add_to_cart_text_archive_render_external(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_add_to_cart_text_archive_external]' name='genwoo_settings[genwoo_add_to_cart_text_archive_external]'  value='<?php echo (isset($options['genwoo_add_to_cart_text_archive_external']) ?  $options['genwoo_add_to_cart_text_archive_external'] : ''); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_add_to_cart_text_archive_external]">Add to cart</label>
+		</div>		
+		<?php	
+	}
+	
+	// Change Add to cart text - archive product - GROUPED
+	function genwoo_add_to_cart_text_archive_render_grouped(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_add_to_cart_text_archive_grouped]' name='genwoo_settings[genwoo_add_to_cart_text_archive_grouped]'  value='<?php echo (isset($options['genwoo_add_to_cart_text_archive_grouped']) ?  $options['genwoo_add_to_cart_text_archive_grouped'] : ''); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_add_to_cart_text_archive_grouped]">Add to cart</label>
+		</div>		
+		<?php	
+	}
+
+	// Change Add to cart text - archive product - VARIABLE
+	function genwoo_add_to_cart_text_archive_render_variable(){
+		$options = get_option( 'genwoo_settings' );
+		?>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input type='text' class="mdl-textfield__input" id='genwoo_settings[genwoo_add_to_cart_text_archive_variable]' name='genwoo_settings[genwoo_add_to_cart_text_archive_variable]'  value='<?php echo (isset($options['genwoo_add_to_cart_text_archive_variable']) ?  $options['genwoo_add_to_cart_text_archive_variable'] : ''); ?>'>
+			<label class="mdl-textfield__label" for="genwoo_settings[genwoo_add_to_cart_text_archive_variable]">Add to cart</label>
 		</div>		
 		<?php	
 	}
