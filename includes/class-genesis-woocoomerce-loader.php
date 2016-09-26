@@ -51,11 +51,12 @@ class Genesis_Woocommerce_Loader {
 		/** Fail silently if WooCommerce is not activated */
 		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ){
 			add_action( 'admin_notices', array($this, 'genwoo_admin_notice') );
+			//\deactivate_plugins( plugin_basename( __FILE__ ) );
 			return;
-		}
-
-		$this->actions = array();
-		$this->filters = array();
+		}else{
+			$this->actions = array();
+			$this->filters = array();
+		}	
 
 	}
 	
@@ -65,7 +66,7 @@ class Genesis_Woocommerce_Loader {
 	*/
 	public function genwoo_admin_notice(){
 		 $class = 'error';
-		 $message = 'Activate WooCommerce plugin to run WooCommerce with Genesis Theme plugin smoothly!';
+		 $message = 'Activate WooCommerce plugin to run WooCommerce Customizer(with Genesis support) plugin smoothly!';
 		 echo"<div class=\"$class\"> <p>$message</p></div>"; 
 	}
 

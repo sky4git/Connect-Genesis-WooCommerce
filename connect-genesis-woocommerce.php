@@ -1,7 +1,7 @@
 <?php
 namespace GenWoo;
 /**
- * Genesis With WooCommerce
+ * WooCommerce Customizer(with Genesis support)
  *
  * This plugin is built to connect Genesis child theme with Woocommerce just a better way.
  * It provides options so that store setting can easily be managed in genesis websites. The plugin will override
@@ -27,9 +27,9 @@ namespace GenWoo;
  * @package           connect_genesis_woocommerce
  *
  * @wordpress-plugin
- * Plugin Name:       WooCommerce with Genesis theme
+ * Plugin Name:       WooCommerce Customizer(with Genesis support)
  * Plugin URI:        http://www.developersq.com/
- * Description:       Connect your Genesis child theme better way with WooCommerce.
+ * Description:       Customize WooCommerce for Genesis and/or Custom theme.
  * Version:           4.0
  * Author:            Aakash Dodiya
  * Author URI:        http://wwww.developersq.com/
@@ -40,8 +40,8 @@ namespace GenWoo;
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**

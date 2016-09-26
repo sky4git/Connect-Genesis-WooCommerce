@@ -1,4 +1,4 @@
-=== WooCommerce With Genesis Theme ===
+=== WooCommerce Customizer (with Genesis support) ===
 Contributors: developersq
 Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
@@ -14,7 +14,7 @@ Customize WooCommerce for Genesis and/or Custom theme.
 
 Customize WooCommerce for Genesis and/or Custom theme.
 
-It provides options so that store setting can easily be managed in Genesis or Custom theme websites. 
+It provides options so that store setting can easily be managed in Genesis and/or Custom theme websites. 
 
 Other Plugin features:
 
@@ -73,7 +73,7 @@ No, But in most cases it uses wordpress standard hooks, so probably it will be g
 == Changelog ==
 
 = 4.0 =
-* Setting menu moved to WooCommerce submenu. Accessible from WooCommerce > WooCommerce + Genesis setting
+* Setting menu moved to WooCommerce submenu. Accessible from WooCommerce > Customizer
 * Option to change Return to shop url added.
 * Option to change Continue shopping url added.
 
