@@ -51,7 +51,7 @@ e.g.
 
 1. Upload `connect-genesis-woocommerce` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Setting menu located in WooCommerce > WooCommerce + Genesis setting.
+3. Setting menu located in WooCommerce > Customizer.
 
 
 == Frequently Asked Questions ==
@@ -59,10 +59,6 @@ e.g.
 = Should I Activate WooCoommerce before activating this plugin? =
 
 Yes, Please. 
-
-= Is this plugin been tested with non-Genesis themes? =
-
-No, But in most cases it uses wordpress standard hooks, so probably it will be good.
 
 == Screenshots ==
 
