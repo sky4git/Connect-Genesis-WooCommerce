@@ -717,11 +717,11 @@ class Genesis_Woocommerce_Admin {
 	private function genwoo_misc_section(){ 
 		?>
 			<div class='linkdiv'>
-				<a href='https://www.developersq.com' target='_blank' class='banner1'>
+				<a href='https://www.developersq.com/?utm_source=connect-genesis-woocommerce&utm_medium=banner&utm_campaign=plugin' target='_blank' class='banner1'>
 					
 				</a>
 				<hr />
-				<a href='https://www.developersq.com/learn-reactjs-basics/' target='_blank' class='banner2'>
+				<a href='https://www.developersq.com/learn-reactjs-basics/?utm_source=connect-genesis-woocommerce&utm_medium=banner&utm_campaign=plugin' target='_blank' class='banner2'>
 					
 				</a>
 			</div>
