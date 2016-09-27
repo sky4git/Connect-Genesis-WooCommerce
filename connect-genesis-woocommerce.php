@@ -31,7 +31,7 @@ namespace GenWoo;
  * Plugin URI:        http://www.developersq.com/
  * Description:       Customize WooCommerce for Genesis and/or Custom theme.
  * Version:           4.0
- * Author:            Aakash Dodiya
+ * Author:            DevelopersQ
  * Author URI:        http://wwww.developersq.com/
  * License:           GPL-3.0
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt
