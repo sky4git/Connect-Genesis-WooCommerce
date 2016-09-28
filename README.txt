@@ -72,6 +72,8 @@ Yes, Please.
 * Setting menu moved to WooCommerce submenu. Accessible from WooCommerce > Customizer
 * Option to change Return to shop url added.
 * Option to change Continue shopping url added.
+* Options to change 'Add to cart' text for multiple product types.
+* Plugin name updated from previousely 'WooCommerce with Genesis theme' to 'WooCommerce Customizer (with Genesis support)'.
 
 = 3.1 =
 * Bug fixed: Notice error was appearing when there was no additional information data available to show on product page. Added additional checks to verify array entries exists for product tabs.  https://github.com/sky4git/Connect-Genesis-WooCommerce/issues/2
