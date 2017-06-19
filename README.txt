@@ -3,8 +3,8 @@ Contributors: developersq
 Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 4.1
+Tested up to: 4.8
+Stable tag: 5.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -18,6 +18,7 @@ It provides options so that store setting can easily be managed in Genesis and/o
 
 Other Plugin features:
 
+1. Supports WooCommerce 3.x +
 1. Enable Woocommerce support option for your theme
 1. Enable Genesis layouts for product option (For Genesis theme)
 1. Enable Genesis SEO support option (For Genesis theme)
@@ -67,6 +68,9 @@ Yes, Please.
 3. Shop page settings
 
 == Changelog ==
+
+= 5.0 =
+* Compatibiity improved for WooCommerce 3.x +
 
 = 4.0 =
 * Setting menu moved to WooCommerce submenu. Accessible from WooCommerce > Customizer

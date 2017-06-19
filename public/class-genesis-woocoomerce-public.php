@@ -419,7 +419,7 @@ class Genesis_Woocommerce_Public {
 					$ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
 					$ancestors = array_reverse( $ancestors );			
 					foreach ( $ancestors as $ancestor ) {
-						$ancestor = get_term( $ancestor, $taxonomy );
+						$ancestor = get_term( $ancestor, 'product_cat' );
 			
 						if ( ! is_wp_error( $ancestor ) && $ancestor ) {
 							$crumb = $this->add_crumb( $crumb,$args['sep'],  $ancestor->name, get_term_link( $ancestor ) );
@@ -434,7 +434,7 @@ class Genesis_Woocommerce_Public {
 			} else {
 				$cat = current( get_the_category( $post ) );
 				if ( $cat ) {
-					$ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
+					$ancestors = get_ancestors( $main_term->term_id, 'post_category' );
 					$ancestors = array_reverse( $ancestors );			
 					foreach ( $ancestors as $ancestor ) {
 						$ancestor = get_term( $ancestor, $taxonomy );
@@ -693,7 +693,7 @@ class Genesis_Woocommerce_Public {
 		if($add_to_cart_text){ 
 			global $product;
 			// get product type	
-			$product_type = $product->product_type;
+			$product_type = $product->get_type();
 			if($product_type === 'simple'):
 				return __( $add_to_cart_text, 'woocommerce' );
 			endif;
@@ -724,7 +724,7 @@ class Genesis_Woocommerce_Public {
 		if($add_to_cart_text){ 
 			global $product;
 			// get product type	
-			$product_type = $product->product_type;
+			$product_type = $product->get_type();
 			if($product_type === 'grouped'):
 				return __( $add_to_cart_text, 'woocommerce' );
 			endif;
@@ -741,7 +741,7 @@ class Genesis_Woocommerce_Public {
 		if($add_to_cart_text){ 
 			global $product;
 			// get product type	
-			$product_type = $product->product_type;
+			$product_type = $product->get_type();
 			if($product_type === 'variable'):
 				return __( $add_to_cart_text, 'woocommerce' );
 			endif;
