@@ -4,7 +4,7 @@ Donate link: https://www.developersq.com
 Tags: genesis, woocommerce
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 5.0
+Stable tag: 5.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,7 +69,7 @@ Yes, Please.
 
 == Changelog ==
 
-= 5.0 =
+= 5.1 =
 * Compatibiity improved for WooCommerce 3.x +
 
 = 4.0 =
