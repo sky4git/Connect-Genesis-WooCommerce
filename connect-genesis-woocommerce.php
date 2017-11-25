@@ -30,7 +30,7 @@ namespace GenWoo;
  * Plugin Name:       WooCommerce Customizer(with Genesis support)
  * Plugin URI:        http://www.developersq.com/
  * Description:       Customize WooCommerce for Genesis and/or Custom theme.
- * Version:           5.1
+ * Version:           6
  * Author:            DevelopersQ
  * Author URI:        http://wwww.developersq.com/
  * License:           GPL-3.0

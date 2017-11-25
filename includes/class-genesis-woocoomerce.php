@@ -69,7 +69,7 @@ class Genesis_Woocommerce {
 	public function __construct() {
 
 		$this->genesis_woocoomerce = 'genesis-woocoomerce';
-		$this->version = '5.1';
+		$this->version = '6';
 
 		$this->load_dependencies();
 		$this->set_locale();

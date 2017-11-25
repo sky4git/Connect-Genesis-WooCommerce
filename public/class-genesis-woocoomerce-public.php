@@ -576,7 +576,7 @@ class Genesis_Woocommerce_Public {
 	*/
 	function genwoo_remove_product_page_sku($enabled){
 		$disable_sku = (isset($this->options['genwoo_single_product_hide_sku']) ? $this->options['genwoo_single_product_hide_sku'] : false);
-		if($disable_sku){ 
+		if( $disable_sku && !is_admin() ){ 
 			return false;
 		}
 		return $enabled;
