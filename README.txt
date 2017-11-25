@@ -69,6 +69,9 @@ Yes, Please.
 
 == Changelog ==
 
+= 6.0 =
+* SKU bug resolved
+
 = 5.1 =
 * Compatibiity improved for WooCommerce 3.x +
 
